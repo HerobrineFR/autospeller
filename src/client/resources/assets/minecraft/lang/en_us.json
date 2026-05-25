@@ -1,0 +1,5 @@
+{
+  "text.autoconfig.autospeller.title": "Speech Linter Configuration",
+  "text.autoconfig.autospeller.option.enableMod": "Enable mod",
+  "text.autoconfig.autospeller.option.ignoredWords": "Ignored words"
+}

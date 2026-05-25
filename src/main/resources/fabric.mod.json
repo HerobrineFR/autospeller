@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "autospeller",
+  "version": "${version}",
+
+  "name": "Autospeller",
+  "description": "A mod that provides chat corrections.",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/autospeller/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.herobrine.autospeller.client.AutospellerDataGenerator"
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "fr.herobrine.autospeller.client.AutospellerClient"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "fr.herobrine.autospeller.client.integration.AutospellerModMenuIntegration"
+      }
+    ],
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "fr.herobrine.autospeller.Autospeller"
+      }
+    ]
+  },
+
+  "mixins": [
+    "autospeller.mixins.json"
+    ,{
+      "config": "autospeller.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-language-kotlin": ">=${kotlin_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
