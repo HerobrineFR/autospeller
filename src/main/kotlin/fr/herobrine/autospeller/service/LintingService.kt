@@ -19,7 +19,7 @@ data class LintingService(
     var linterConfiguration: LinterConfigurationInterface,
     var debounce: Duration = 200.milliseconds.toJavaDuration(),
 ) {
-    val inputProcessor = linterConfiguration.createInputProcessor()
+    var inputProcessor: InputProcessor = linterConfiguration.createInputProcessor()
 
     init {
         Autospeller.logger.info("[Autospeller] Linting service created")
