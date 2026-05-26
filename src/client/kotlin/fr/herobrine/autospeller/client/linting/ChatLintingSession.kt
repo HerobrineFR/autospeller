@@ -9,6 +9,9 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 import kotlin.time.toKotlinDuration
 
+/**
+ * Current chat window. Holds the linting session's state.
+ */
 data class ChatLintingSession(
     override var lastCheck: Instant? = null,
     override var lastInput: TokenInputElement?,
@@ -16,6 +19,9 @@ data class ChatLintingSession(
 ): LintingSession {
     override fun shouldLint(ticket: LintingTicket): Boolean = ticket.input.input.length > 1 && !shouldDebounce(ticket.debounceDuration) && ticket.input.input != lastInput?.input
 
+    /**
+     * Verifies if the linter should debounce.
+     */
     private fun shouldDebounce(
         debounceTime: Duration
     ): Boolean {

@@ -9,6 +9,11 @@ import org.languagetool.JLanguageTool
 import org.languagetool.language.French
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Processes inputs through a LanguageTool instance.
+ *
+ * The processor and it's language sets must be initialized, which is done async but can take quite a while.
+ */
 data class LanguageToolInputProcessor(
     private var languageTool: JLanguageTool? = null
 ): InputProcessor {
@@ -36,6 +41,10 @@ data class LanguageToolInputProcessor(
         }
     }
 
+    /**
+     * Processes the input.
+     * @return the result of the linting process.
+     */
     override fun process(input: TokenInputElement): LintingResult {
         val suggestions = arrayListOf<TextSuggestion>()
         val maxReplacements = 4

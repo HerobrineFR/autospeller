@@ -13,8 +13,18 @@ import net.minecraft.resources.Identifier
 import net.minecraft.util.FormattedCharSequence
 import org.joml.Vector2i
 
+/**
+ * Singleton object used to render the chat suggestion widgets and to
+ * handle some interactions.
+ */
 object ChatRenderer {
 
+    /**
+     * Replaces in the input in an [EditBox] with the replacement held by a [TooltipWidget].
+     *
+     * @param tooltip Selected widget, holding the replacement
+     * @param editBox Text field of which the input is changed
+     */
     fun replaceInput(
         tooltip: TooltipWidget,
         editBox: EditBox,
@@ -24,6 +34,14 @@ object ChatRenderer {
         editBox.value = newText
     }
 
+    /**
+     * Renders a rendering ticket, along with its replacement suggestions and underlines.
+     *
+     * @param graphics Graphics extractor used
+     * @param renderingTicket Ticket holding the text suggestions and session
+     * @param pointerPosition Position of the user's pointer
+     * @param renderTooltips Defines if the tooltips should be rendered (they can be excluded from rendering, eg. with chat drafts)
+     */
     fun submitUnderlinesTicket(
         graphics: GuiGraphicsExtractor,
         renderingTicket: ChatRenderingTicket,
@@ -154,6 +172,9 @@ object ChatRenderer {
         return highlightedReplacement
     }
 
+    /**
+     * Returns the origin position that should be applied to a tooltip.
+     */
     fun positionVec(underlineStartX: Int, currentIteration: Int, editBox: EditBox): Vector2i {
         val tooltipBoxBottonMargin = 6
         val origin = Vector2i(
@@ -164,6 +185,12 @@ object ChatRenderer {
         return origin
     }
 
+    /**
+     * A clickable suggestion widget.
+     *
+     * @param text Suggested replacement
+     * @param suggestion Suggestion from which the widget comes from
+     */
     data class TooltipWidget(
         val text: String,
         val suggestion: TextSuggestion
