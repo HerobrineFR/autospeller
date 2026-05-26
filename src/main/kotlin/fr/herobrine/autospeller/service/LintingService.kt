@@ -11,6 +11,10 @@ import kotlin.time.Clock
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.toJavaDuration
 
+/**
+ * Base service of the mod. Contains the mod's config and debounce rate, and is
+ * used to submit tickets to the input processor.
+ */
 data class LintingService(
     var linterConfiguration: LinterConfigurationInterface,
     var debounce: Duration = 200.milliseconds.toJavaDuration(),
@@ -21,6 +25,12 @@ data class LintingService(
         Autospeller.logger.info("[Autospeller] Linting service created")
     }
 
+    /**
+     * Submits a [LintingTicket] to the [InputProcessor] in order to get suggestions based on the processor's backend rules.
+     *
+     * @param ticket Payload that should be checked by the processor.
+     * @param session Session that handles the user's interactions with the service.
+     */
     fun processTicket(
         ticket: LintingTicket,
         session: LintingSession

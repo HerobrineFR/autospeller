@@ -2,6 +2,9 @@ package fr.herobrine.autospeller.language
 
 import fr.herobrine.autospeller.ignore.VocabularyIgnoration
 
+/**
+ * Collection of words.
+ */
 class WordSet(
     private val wordSet: List<WordElement>
 ): LanguageSet<WordElement>, VocabularyIgnoration<WordElement> {
