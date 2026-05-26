@@ -5,9 +5,12 @@ import fr.herobrine.autospeller.language.TokenInputElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.TextSuggestion
 import fr.herobrine.autospeller.service.InputProcessor
+import kotlinx.coroutines.delay
 import org.languagetool.JLanguageTool
 import org.languagetool.language.French
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.minutes
 
 /**
  * Processes inputs through a LanguageTool instance.
@@ -23,6 +26,7 @@ data class LanguageToolInputProcessor(
 
         CompletableFuture.runAsync {
             val french = French.getInstance()
+            TimeUnit.MINUTES.sleep(5)
             try {
                 logger.info("[Linter] Creating LT instance with classLoader.")
                 val languageTool = JLanguageTool(
@@ -81,4 +85,5 @@ data class LanguageToolInputProcessor(
         return LintingResult(suggestions)
     }
 
+    override fun isReady() = this.ready
 }

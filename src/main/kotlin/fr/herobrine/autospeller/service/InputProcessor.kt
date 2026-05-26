@@ -16,4 +16,9 @@ interface InputProcessor {
      * @return A result which can include a list of suggestions.
      */
     fun process(input: TokenInputElement): LintingResult
+
+    /**
+     * Tells if the input processor is ready, or still in a pending state.
+     */
+    fun isReady(): Boolean
 }
