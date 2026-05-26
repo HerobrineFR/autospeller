@@ -127,7 +127,7 @@ object ChatRenderer {
                     renderingQueue.add {
                         if(highlightedReplacement == createTooltipWidget()) {
                             graphics.requestCursor(CursorTypes.POINTING_HAND)
-                            tooltipStyle = Identifier.parse("herobrine:active")
+                            tooltipStyle = Identifier.parse("autospeller:active")
                         }
 
                         graphics.tooltip(
