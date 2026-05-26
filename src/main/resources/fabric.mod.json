@@ -5,8 +5,13 @@
 
   "name": "Autospeller",
   "description": "A mod that provides chat corrections.",
-  "authors": [],
-  "contact": {},
+  "authors": [
+    "Yazor"
+  ],
+  "contact": {
+    "sources": "https://github.com/HerobrineFR/autospeller",
+    "issues": "https://github.com/HerobrineFR/autospeller/issues"
+  },
   "license": "MIT",
   "icon": "assets/autospeller/icon.png",
 
