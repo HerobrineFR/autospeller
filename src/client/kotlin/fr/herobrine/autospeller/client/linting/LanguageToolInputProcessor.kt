@@ -26,7 +26,7 @@ data class LanguageToolInputProcessor(
 
         CompletableFuture.runAsync {
             val french = French.getInstance()
-            TimeUnit.MINUTES.sleep(5)
+
             try {
                 logger.info("[Linter] Creating LT instance with classLoader.")
                 val languageTool = JLanguageTool(
