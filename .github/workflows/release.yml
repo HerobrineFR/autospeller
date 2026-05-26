@@ -1,0 +1,14 @@
+name: release.yml
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    uses: HerobrineFR/autospeller/.github/workflows/build.yml@main
+    name: Build release artifacts
+
+  release:
+    uses: softprops/action-gh-release@v3
+    with: build/libs/*.jar
