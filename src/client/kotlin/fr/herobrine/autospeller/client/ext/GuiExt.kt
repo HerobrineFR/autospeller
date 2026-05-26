@@ -4,6 +4,9 @@ import fr.herobrine.autospeller.mixin.gui.EditBoxAccessor
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.components.EditBox
 
+/**
+ * Gets the visible text string in the rendered EditBox.
+ */
 fun EditBox.visibleText(): String {
     val accessor = this as EditBoxAccessor
     return this.asAccessor().font.plainSubstrByWidth(
