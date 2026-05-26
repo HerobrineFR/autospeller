@@ -42,6 +42,9 @@ fabricApi {
 repositories {
     maven { url = uri("https://maven.terraformersmc.com/") }
     maven { url = uri("https://maven.shedaniel.me/") }
+    maven("https://maven.isxander.dev/releases") {
+        name = "Xander Maven"
+    }
 }
 
 val transitiveInclude by configurations.creating {
@@ -61,7 +64,7 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
     implementation("net.fabricmc:fabric-language-kotlin:${providers.gradleProperty("fabric_kotlin_version").get()}")
     implementation("com.terraformersmc:modmenu:${providers.gradleProperty("modmenu_version").get()}")
-    implementation("me.shedaniel.cloth:cloth-config-fabric:26.1.154")
+    implementation("dev.isxander:yet-another-config-lib:${providers.gradleProperty("yacl_version").get()}")
 
     transitiveInclude("org.languagetool:language-fr:6.6") {
         exclude("it.unimi.dsi")
