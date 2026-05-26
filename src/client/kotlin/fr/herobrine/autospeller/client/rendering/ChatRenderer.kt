@@ -1,6 +1,8 @@
 package fr.herobrine.autospeller.client.rendering
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes
+import fr.herobrine.autospeller.Autospeller
+import fr.herobrine.autospeller.client.AutospellerClient
 import fr.herobrine.autospeller.client.ext.getFont
 import fr.herobrine.autospeller.client.ext.visibleText
 import fr.herobrine.autospeller.linting.TextSuggestion
@@ -83,7 +85,7 @@ object ChatRenderer {
                     underlineStartX,
                     underlineEndX,
                     (editBox.y + editBox.height) - 4,
-                    -43691
+                    AutospellerClient.service.linterConfiguration.underlineColor.rgb
                 )
 
                 if(!renderTooltips) {
