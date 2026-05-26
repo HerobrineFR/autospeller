@@ -6,10 +6,19 @@ on:
 
 jobs:
   build:
-    uses: HerobrineFR/autospeller/.github/workflows/build.yml@main
+    uses: ./.github/workflows/build.yml
     name: Build release artifacts
 
   release:
-    uses: softprops/action-gh-release@v3
-    with:
-      files: build/libs/*.jar
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: jars
+          path: artifacts
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*.jar
