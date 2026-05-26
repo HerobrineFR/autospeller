@@ -11,4 +11,5 @@ jobs:
 
   release:
     uses: softprops/action-gh-release@v3
-    with: build/libs/*.jar
+    with:
+      files: build/libs/*.jar
