@@ -15,8 +15,10 @@ import net.minecraft.client.gui.TextAlignment
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.font.FontManager
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
+import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 import net.minecraft.resources.Identifier
+import net.minecraft.util.CommonColors
 import net.minecraft.util.FormattedCharSequence
 import org.joml.Vector2i
 
@@ -31,14 +33,15 @@ object ChatRenderer {
     ) {
         val textRenderer = graphics.textRenderer()
 
-        val screenX = graphics.guiWidth() +10
-        val screenY = graphics.guiHeight()
-
+        val screenX = graphics.guiWidth() - 10
+        val screenY = (graphics.guiHeight() / 1.12).toInt()
         textRenderer.accept(
             TextAlignment.RIGHT,
             screenX,
             screenY,
-            "text.config.autospeller.gui.loading_text".asTranslatable()
+            Component.empty().withColor(CommonColors.GRAY).append(
+                "text.config.autospeller.gui.loading_text".asTranslatable()
+            )
         )
     }
 
