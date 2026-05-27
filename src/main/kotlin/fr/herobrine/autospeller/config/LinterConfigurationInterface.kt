@@ -1,5 +1,6 @@
 package fr.herobrine.autospeller.config
 
+import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import java.awt.Color
@@ -14,6 +15,11 @@ interface LinterConfigurationInterface {
      * Syntax highlighting color.
      */
     var underlineColor: Color
+
+    /**
+     * Selected language.
+     */
+    var language: Language
 
     /**
      * Filter of words that should be ignored by the linter.

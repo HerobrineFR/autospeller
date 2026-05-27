@@ -5,6 +5,7 @@ import dev.isxander.yacl3.api.ListOption
 import dev.isxander.yacl3.api.Option
 import dev.isxander.yacl3.api.YetAnotherConfigLib
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder
 import dev.isxander.yacl3.api.controller.StringControllerBuilder
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
@@ -15,6 +16,7 @@ import fr.herobrine.autospeller.config.LinterConfigurationInterface
 import fr.herobrine.autospeller.ext.asLiteral
 import fr.herobrine.autospeller.ext.asTranslatable
 import fr.herobrine.autospeller.ignore.IgnoreList
+import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.language.WordSet
 import fr.herobrine.autospeller.service.IgnoreFilter
@@ -31,6 +33,9 @@ class AutospellerConfiguration:  LinterConfigurationInterface {
 
     @SerialEntry(value = "underline_color")
     override var underlineColor = Color.RED
+
+    @SerialEntry(value = "language")
+    override var language = Language.ENGLISH
 
     companion object {
         val HANDLER = ConfigClassHandler.createBuilder(
@@ -50,6 +55,15 @@ class AutospellerConfiguration:  LinterConfigurationInterface {
                         name("text.config.autospeller.option.enable_mod".asTranslatable())
                         controller(TickBoxControllerBuilder::create)
                         binding(true, this@AutospellerConfiguration::enableMod, {value -> this@AutospellerConfiguration.enableMod = value})
+                        build()
+                    }
+                )
+
+                option(
+                    with(Option.createBuilder<Language>()) {
+                        name("text.config.autospeller.selected_language".asTranslatable())
+                        controller({ opt -> EnumControllerBuilder.create(opt).enumClass(Language::class.java) })
+                        binding(Language.ENGLISH, this@AutospellerConfiguration::language, { lang -> this@AutospellerConfiguration.language = lang })
                         build()
                     }
                 )

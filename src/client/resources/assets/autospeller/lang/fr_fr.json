@@ -6,5 +6,9 @@
   "text.config.autospeller.category.gui": "Interface",
   "text.config.autospeller.category.gui.description": "Paramètres liés à l'interface du mod.",
   "text.config.autospeller.option.underline_color": "Texte du soulignement",
-  "text.config.autospeller.gui.loading_text": "Chargement d'Autospeller..."
+  "text.config.autospeller.gui.loading_text": "Chargement d'Autospeller...",
+  "text.language.autospeller.french": "Français",
+  "text.language.autospeller.english": "Anglais",
+
+  "text.config.autospeller.selected_language": "Langue"
 }
