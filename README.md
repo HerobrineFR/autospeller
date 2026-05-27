@@ -1,5 +1,5 @@
 # Autospeller
-#### This mod is still in beta, and only supports French ! English is planned in a future release.
+#### This mod is still in beta, and might come with some bugs and slowdowns !
 ### Requires [Mod Menu](https://modrinth.com/mod/modmenu), [Yet Another Config Library (YACL)](https://modrinth.com/mod/yacl) and [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
 Autospeller provides text highlighting and suggestions to Minecraft's chat.
 
@@ -15,11 +15,11 @@ Autospeller currently only supports Minecraft version **26.1.2** and the **Fabri
 |----------|--------|-------------|
 | **26.1** | ✅      | ❌ (Planned) |
 
-Autospeller currently only supports **French**, but **English** support is planned for the next beta releases.
+Autospeller currently only supports **French** and **English** (default).
 
-Other languages such as **Spanish** and **German** might be supported later on.
+Support for other languages, such as Spanish and German, might come later.
 
 | Language | Localization | Functionnality |
 |----------|--------------|----------------|
 | French   | ✅            | ✅              |
-| English  | ✅            | ⚠️ (Planned)   |
+| English  | ✅            | ✅              |
