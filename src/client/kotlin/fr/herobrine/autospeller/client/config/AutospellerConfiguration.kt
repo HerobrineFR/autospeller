@@ -37,6 +37,8 @@ class AutospellerConfiguration:  LinterConfigurationInterface {
     @SerialEntry(value = "language")
     override var language = Language.ENGLISH
 
+    private var inputProcessor: LanguageToolInputProcessor? = null
+
     companion object {
         val HANDLER = ConfigClassHandler.createBuilder(
             AutospellerConfiguration::class.java
@@ -96,7 +98,10 @@ class AutospellerConfiguration:  LinterConfigurationInterface {
                 build()
             })
 
-            save(MOD_CONFIG_HANDLER::save)
+            save({
+                MOD_CONFIG_HANDLER::save
+                this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
+            })
 
             return@with build().generateScreen(parentScreen)
         }
@@ -108,7 +113,19 @@ class AutospellerConfiguration:  LinterConfigurationInterface {
         ))
     )
 
-    override fun createInputProcessor(): InputProcessor {
-        return LanguageToolInputProcessor()
+    override fun createInputProcessor(): LanguageToolInputProcessor {
+        return when(this.inputProcessor == null) {
+            false -> this.inputProcessor!!
+            else -> {
+                this.inputProcessor = LanguageToolInputProcessor()
+
+                return with(this.inputProcessor!!) {
+                    language = this@AutospellerConfiguration.language
+
+                    this
+                }
+            }
+        }
+
     }
 }

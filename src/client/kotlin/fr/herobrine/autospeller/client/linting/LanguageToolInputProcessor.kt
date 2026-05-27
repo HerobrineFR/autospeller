@@ -1,16 +1,15 @@
 package fr.herobrine.autospeller.client.linting
 
 import fr.herobrine.autospeller.Autospeller.logger
+import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.TokenInputElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.TextSuggestion
 import fr.herobrine.autospeller.service.InputProcessor
-import kotlinx.coroutines.delay
 import org.languagetool.JLanguageTool
+import org.languagetool.language.AmericanEnglish
 import org.languagetool.language.French
 import java.util.concurrent.CompletableFuture
-import java.util.concurrent.TimeUnit
-import kotlin.time.Duration.Companion.minutes
 
 /**
  * Processes inputs through a LanguageTool instance.
@@ -18,19 +17,27 @@ import kotlin.time.Duration.Companion.minutes
  * The processor and it's language sets must be initialized, which is done async but can take quite a while.
  */
 data class LanguageToolInputProcessor(
-    private var languageTool: JLanguageTool? = null
+    private var languageTool: JLanguageTool? = null,
 ): InputProcessor {
     private var ready = false
 
-    init {
+    var language: Language = Language.ENGLISH
+        set(value) {
+            field = value
+            this.loadLanguage()
+        }
 
+    fun loadLanguage() {
         CompletableFuture.runAsync {
-            val french = French.getInstance()
+            this.ready = false
 
             try {
-                logger.info("[Linter] Creating LT instance with classLoader.")
+                logger.info("[Linter] Creating LT instance.")
                 val languageTool = JLanguageTool(
-                    french,
+                    when(this.language) {
+                        Language.FRENCH -> French.getInstance()
+                        else -> AmericanEnglish.getInstance()
+                    },
                 )
 
                 languageTool.check("")
