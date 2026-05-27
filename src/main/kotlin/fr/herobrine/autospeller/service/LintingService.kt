@@ -19,11 +19,12 @@ data class LintingService(
     var linterConfiguration: LinterConfigurationInterface,
     var debounce: Duration = 200.milliseconds.toJavaDuration(),
 ) {
-    var inputProcessor: InputProcessor = linterConfiguration.createInputProcessor()
 
     init {
         Autospeller.logger.info("[Autospeller] Linting service created")
     }
+
+    fun getInputProcessor() = linterConfiguration.createInputProcessor()
 
     /**
      * Submits a [LintingTicket] to the [InputProcessor] in order to get suggestions based on the processor's backend rules.
@@ -41,7 +42,7 @@ data class LintingService(
                     null
                 }
                 true -> {
-                    val result = inputProcessor.process(ticket.input)
+                    val result = this.getInputProcessor().process(ticket.input)
                     session.lastCheck = Clock.System.now()
                     session.lastInput = ticket.input
 

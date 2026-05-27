@@ -66,10 +66,16 @@ dependencies {
     implementation("com.terraformersmc:modmenu:${providers.gradleProperty("modmenu_version").get()}")
     implementation("dev.isxander:yet-another-config-lib:${providers.gradleProperty("yacl_version").get()}")
 
+    transitiveInclude("org.languagetool:language-en:6.6") {
+        exclude("it.unimi.dsi")
+        exclude("org.apache.commons", "commons-lang3")
+    }
+
     transitiveInclude("org.languagetool:language-fr:6.6") {
         exclude("it.unimi.dsi")
         exclude("org.apache.commons", "commons-lang3")
     }
+
     transitiveInclude("org.languagetool:languagetool-core:6.6") {
         exclude("it.unimi.dsi")
         exclude("org.apache.commons", "commons-lang3")
