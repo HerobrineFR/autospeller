@@ -24,6 +24,7 @@ stonecutter {
 }
 
 
+
 platform {
 	loader = "fabric-m"
 	dependencies {
@@ -36,14 +37,18 @@ platform {
 		}
 		required("fabricloader") {
 			fabricLikeVersionRange = ">=${prop("deps.fabric-loader")}"
+			modrinth = "yacl"
 		}
 		required("yet_another_config_lib_v3") {
 			fabricLikeVersionRange = ">=${prop("deps.yacl")}-fabric"
 		}
 		required("fabric-language-kotlin") {
 			fabricLikeVersionRange = ">=${prop("deps.fabric-language-kotlin")}"
+			modrinth = "fabric-language-kotlin"
 		}
-		optional("modmenu") {}
+		optional("modmenu") {
+			modrinth = "modmenu"
+		}
 	}
 }
 

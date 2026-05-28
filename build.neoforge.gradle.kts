@@ -31,9 +31,11 @@ platform {
 		}
 		required("yet_another_config_lib_v3") {
 			forgeLikeVersionRange = ">=${prop("deps.yacl")}-${loader}"
+			modrinth = "yacl"
 		}
 		required("kotlinforforge") {
 			forgeLikeVersionRange = ">=${prop("deps.kotlin-for-forge")}"
+			modrinth = "kotlin-for-forge"
 		}
 	}
 }
