@@ -1,14 +1,20 @@
 package fr.herobrine.autospeller.client.linting
 
+import fr.herobrine.autospeller.Autospeller
 import fr.herobrine.autospeller.Autospeller.logger
 import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.TokenInputElement
+import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.TextSuggestion
+import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import org.languagetool.JLanguageTool
+import org.languagetool.ResultCache
+import org.languagetool.UserConfig
 import org.languagetool.language.AmericanEnglish
 import org.languagetool.language.French
+import org.languagetool.rules.RuleMatch
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -18,6 +24,7 @@ import java.util.concurrent.CompletableFuture
  */
 data class LanguageToolInputProcessor(
     private var languageTool: JLanguageTool? = null,
+	private val ignoreFilter: IgnoreFilter?
 ): InputProcessor {
     private var ready = false
 
@@ -38,6 +45,8 @@ data class LanguageToolInputProcessor(
                         Language.FRENCH -> French.getInstance()
                         else -> AmericanEnglish.getInstance()
                     },
+					ResultCache(512),
+					UserConfig(this.ignoreFilter?.ignoreList?.wordSet?.getElements()?.map { el -> el.word } ?: emptyList())
                 )
 
                 languageTool.check("")

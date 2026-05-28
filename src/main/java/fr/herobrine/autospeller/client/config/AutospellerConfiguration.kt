@@ -107,7 +107,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
         }
     }
 
-    override suspend fun ignoreFilter(): IgnoreFilter = IgnoreFilter(
+    override fun ignoreFilter(): IgnoreFilter = IgnoreFilter(
         IgnoreList(WordSet(
             ignoredWords.map { WordElement(it) }
         ))
@@ -117,7 +117,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
         return when(this.inputProcessor == null) {
             false -> this.inputProcessor!!
             else -> {
-                this.inputProcessor = LanguageToolInputProcessor()
+                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter())
 
                 return with(this.inputProcessor!!) {
                     language = this@AutospellerConfiguration.language
@@ -128,4 +128,12 @@ class AutospellerConfiguration: LinterConfigurationInterface {
         }
 
     }
+
+	override fun getIgnoreFilter(): IgnoreFilter? {
+		return IgnoreFilter(
+			IgnoreList(
+				WordSet(this.ignoredWords.map { w -> WordElement(w) })
+			)
+		)
+	}
 }

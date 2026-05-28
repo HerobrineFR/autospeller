@@ -24,10 +24,12 @@ interface LinterConfigurationInterface {
     /**
      * Filter of words that should be ignored by the linter.
      */
-    suspend fun ignoreFilter(): IgnoreFilter
+    fun ignoreFilter(): IgnoreFilter
 
     /**
      * Creates an input processor.
      */
     fun createInputProcessor(): InputProcessor
+
+	fun getIgnoreFilter(): IgnoreFilter?
 }
