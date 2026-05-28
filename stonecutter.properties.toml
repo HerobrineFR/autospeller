@@ -1,0 +1,40 @@
+mod.id = "autospeller"
+mod.name = "Autospeller"
+mod.group = "fr.herobrine"
+mod.version = "1.0"
+mod.channel_tag = "-beta.4"
+mod.description = "A mod that provides chat corrections."
+mod.authors = ["Yazor"]
+mod.contributors = []
+mod.inception_year = "2026"
+mod.license.name = "MIT"
+mod.license.url = "https://opensource.org/licenses/MIT"
+mod.license.dist = "repo"
+mod.sources_url = "https://github.com/HerobrineFR/autospeller"
+mod.homepage_url = "https://modrinth.com/mod/autospeller"
+mod.issues_url = "https://github.com/HerobrineFR/autospeller/issues"
+mod.discord_url = ""
+[[mod.pom.developers]]
+id = "yazor"
+name = "Yazor"
+url = "https://github.com/Yaazor"
+
+[fabric]
+deps.fabric-loader = "0.19.2"
+
+[fabric."26.1.2"]
+deps.minecraft = "26.1.2"
+deps.fabric-api = "0.146.1+26.1.2"
+deps.modmenu = "18.0.0-alpha.8"
+deps.yacl = "3.9.3+26.1"
+deps.fabric-language-kotlin = "1.13.11+kotlin.2.3.21"
+publish.additionalVersions = ["26.1.1", "26.1"]
+
+[neoforge]
+
+[neoforge."26.1.2"]
+deps.minecraft = "26.1.2"
+deps.neoforge = "26.1.2.29-beta"
+deps.yacl = "3.9.3+26.1"
+deps.kotlin-for-forge = "6.2.0"
+publish.additionalVersions = ["26.1.1", "26.1"]
