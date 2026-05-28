@@ -1,7 +1,7 @@
 {
   "text.config.autospeller.title": "Autospeller Configuration",
   "text.config.autospeller.option.enable_mod": "Enable mod",
-  "text.config.autospeller.option.ignored_words": "Ignored words",
+  "text.config.autospeller.option.ignored_words": "Ignored words (WIP)",
   "text.config.autospeller.category.general": "General",
   "text.config.autospeller.category.gui": "GUI",
   "text.config.autospeller.category.gui.description": "Settings related to the mods's graphical interface.",
