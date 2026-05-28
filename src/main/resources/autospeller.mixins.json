@@ -1,14 +1,15 @@
 {
+  "package": "fr.herobrine.autospeller.mixin",
   "required": true,
   "minVersion": "0.8",
-  "package": "fr.herobrine.autospeller.mixin",
-  "compatibilityLevel": "JAVA_25",
-  "mixins": [
-  ],
+  "compatibilityLevel": "${java}",
   "injectors": {
     "defaultRequire": 1
   },
-  "overwrites": {
-    "requireAnnotations": true
-  }
+  "mixins": [
+  ],
+  "client": [
+    "gui.ChatScreenMixin",
+    "gui.EditBoxAccessor"
+  ]
 }
