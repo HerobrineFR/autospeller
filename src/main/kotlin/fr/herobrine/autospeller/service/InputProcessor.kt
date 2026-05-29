@@ -15,10 +15,15 @@ interface InputProcessor {
      *
      * @return A result which can include a list of suggestions.
      */
-    fun process(input: TokenInputElement): LintingResult
+    fun process(input: TokenInputElement, maxSuggestions: Int = 4): LintingResult
 
     /**
-     * Tells if the input processor is ready, or still in a pending state.
+     * Tells if the input processor is ready.
      */
     fun isReady(): Boolean
+
+	/**
+	 * Tells if the processor is in a pending state.
+	 */
+	fun isPending(): Boolean
 }

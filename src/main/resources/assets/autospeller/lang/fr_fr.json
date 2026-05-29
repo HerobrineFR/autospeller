@@ -1,7 +1,7 @@
 {
   "text.config.autospeller.title": "Autospeller Configuration",
   "text.config.autospeller.option.enable_mod": "Activer le mod",
-  "text.config.autospeller.option.ignored_words": "Mots ignorés (WIP)",
+  "text.config.autospeller.option.ignored_words": "Dictionnaire personnel (Requiert redémarrage)",
   "text.config.autospeller.category.general": "Général",
   "text.config.autospeller.category.gui": "Interface",
   "text.config.autospeller.category.gui.description": "Paramètres liés à l'interface du mod.",
@@ -10,5 +10,7 @@
   "text.language.autospeller.french": "Français",
   "text.language.autospeller.english": "Anglais",
 
-  "text.config.autospeller.selected_language": "Langue"
+  "text.config.autospeller.selected_language": "Langue",
+  "text.config.autospeller.group.language": "Options de langue",
+  "text.config.autospeller.option.max_suggestions": "Suggestions max."
 }
