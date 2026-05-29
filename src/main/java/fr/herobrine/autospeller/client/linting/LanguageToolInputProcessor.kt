@@ -37,6 +37,7 @@ data class LanguageToolInputProcessor(
     fun loadLanguage() {
         CompletableFuture.runAsync {
             this.ready = false
+			this.languageTool = null
 
             try {
                 logger.info("[Linter] Creating LT instance.")
@@ -51,7 +52,6 @@ data class LanguageToolInputProcessor(
 
                 languageTool.check("")
 
-                ready = true
                 this.languageTool = languageTool
 
                 logger.info("[Linter] LanguageTool was loaded successfully.")
@@ -69,7 +69,7 @@ data class LanguageToolInputProcessor(
         val suggestions = arrayListOf<TextSuggestion>()
         val maxReplacements = 4
 
-        if(!this.ready || this.languageTool == null) {
+        if(this.languageTool == null) {
             logger.info("[Linter] LanguageTool is not loaded yet.")
             return LintingResult(emptyList())
         }
@@ -98,8 +98,10 @@ data class LanguageToolInputProcessor(
             logger.info("No suggestions were found")
         }
 
+		this.ready = true
         return LintingResult(suggestions)
     }
 
-    override fun isReady() = this.ready
+    override fun isReady() = this.languageTool != null
+	override fun isPending(): Boolean = !this.ready
 }

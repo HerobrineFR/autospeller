@@ -18,7 +18,12 @@ interface InputProcessor {
     fun process(input: TokenInputElement): LintingResult
 
     /**
-     * Tells if the input processor is ready, or still in a pending state.
+     * Tells if the input processor is ready.
      */
     fun isReady(): Boolean
+
+	/**
+	 * Tells if the processor is in a pending state.
+	 */
+	fun isPending(): Boolean
 }
