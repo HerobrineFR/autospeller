@@ -47,7 +47,7 @@ data class LanguageToolInputProcessor(
                         else -> AmericanEnglish.getInstance()
                     },
 					ResultCache(512),
-					UserConfig(this.ignoreFilter?.ignoreList?.wordSet?.getElements()?.map { el -> el.word } ?: emptyList())
+					UserConfig(this.ignoreFilter?.ignoreList?.wordSet?.getElements()?.map { el -> el.word.lowercase() } ?: emptyList())
                 )
 
                 languageTool.check("")
