@@ -7,9 +7,11 @@
   "text.config.autospeller.category.gui.description": "Settings related to the mods's graphical interface.",
   "text.config.autospeller.option.underline_color": "Highlighting color",
   "text.config.autospeller.gui.loading_text": "Loading Autospeller...",
+  "text.config.autospeller.group.language": "Language Options",
 
   "text.language.autospeller.french": "French",
   "text.language.autospeller.english": "English",
+  "text.config.autospeller.option.max_suggestions": "Max. suggestions",
 
   "text.config.autospeller.selected_language": "Language"
 }

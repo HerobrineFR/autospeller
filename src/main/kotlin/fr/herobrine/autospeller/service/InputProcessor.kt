@@ -15,7 +15,7 @@ interface InputProcessor {
      *
      * @return A result which can include a list of suggestions.
      */
-    fun process(input: TokenInputElement): LintingResult
+    fun process(input: TokenInputElement, maxSuggestions: Int = 4): LintingResult
 
     /**
      * Tells if the input processor is ready.

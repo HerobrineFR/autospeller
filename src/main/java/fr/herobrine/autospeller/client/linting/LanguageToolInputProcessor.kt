@@ -65,9 +65,8 @@ data class LanguageToolInputProcessor(
      * Processes the input.
      * @return the result of the linting process.
      */
-    override fun process(input: TokenInputElement): LintingResult {
+    override fun process(input: TokenInputElement, maxSuggestions: Int): LintingResult {
         val suggestions = arrayListOf<TextSuggestion>()
-        val maxReplacements = 4
 
         if(this.languageTool == null) {
             logger.info("[Linter] LanguageTool is not loaded yet.")
@@ -78,8 +77,8 @@ data class LanguageToolInputProcessor(
             val check = languageTool?.check(input.input)
             check?.forEach { match ->
                 var replacements = match.suggestedReplacements
-                if(replacements.size > maxReplacements) {
-                    replacements = replacements.slice(0..<maxReplacements)
+                if(replacements.size > maxSuggestions) {
+                    replacements = replacements.slice(0..<maxSuggestions)
                 }
 
                 suggestions.add(

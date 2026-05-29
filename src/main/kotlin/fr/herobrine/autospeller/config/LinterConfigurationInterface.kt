@@ -11,6 +11,8 @@ interface LinterConfigurationInterface {
      */
     var enableMod: Boolean
 
+	val maxSuggestions: Int
+
     /**
      * Syntax highlighting color.
      */

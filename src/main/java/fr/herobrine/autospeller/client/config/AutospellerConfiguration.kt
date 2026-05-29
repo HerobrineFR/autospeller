@@ -3,14 +3,17 @@ package fr.herobrine.autospeller.client.config
 import dev.isxander.yacl3.api.ConfigCategory
 import dev.isxander.yacl3.api.ListOption
 import dev.isxander.yacl3.api.Option
+import dev.isxander.yacl3.api.OptionGroup
 import dev.isxander.yacl3.api.YetAnotherConfigLib
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder
 import dev.isxander.yacl3.api.controller.EnumControllerBuilder
+import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder
 import dev.isxander.yacl3.api.controller.StringControllerBuilder
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
 import dev.isxander.yacl3.config.v2.api.SerialEntry
 import dev.isxander.yacl3.gui.controllers.ColorController
+import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController
 import fr.herobrine.autospeller.client.linting.LanguageToolInputProcessor
 import fr.herobrine.autospeller.config.LinterConfigurationInterface
 import fr.herobrine.autospeller.ext.asLiteral
@@ -37,6 +40,8 @@ class AutospellerConfiguration: LinterConfigurationInterface {
     @SerialEntry(value = "language")
     override var language = Language.ENGLISH
 
+	override var maxSuggestions: Int = 4
+
     private var inputProcessor: LanguageToolInputProcessor? = null
 
     companion object {
@@ -61,24 +66,29 @@ class AutospellerConfiguration: LinterConfigurationInterface {
                     }
                 )
 
-                option(
-                    with(Option.createBuilder<Language>()) {
-                        name("text.config.autospeller.selected_language".asTranslatable())
-                        controller({ opt -> EnumControllerBuilder.create(opt).enumClass(Language::class.java) })
-                        binding(Language.ENGLISH, this@AutospellerConfiguration::language, { lang -> this@AutospellerConfiguration.language = lang })
-                        build()
-                    }
-                )
+                group(with(OptionGroup.createBuilder()) {
+					name("text.config.autospeller.group.language".asTranslatable())
+					option(
+						with(Option.createBuilder<Language>()) {
+							name("text.config.autospeller.selected_language".asTranslatable())
+							controller({ opt -> EnumControllerBuilder.create(opt).enumClass(Language::class.java) })
+							binding(Language.ENGLISH, this@AutospellerConfiguration::language, { lang -> this@AutospellerConfiguration.language = lang })
+							build()
+						}
+					)
 
-                option(
-                    with(ListOption.createBuilder<String>()) {
-                        name("text.config.autospeller.option.ignored_words".asTranslatable())
-                        binding(listOf<String>(), this@AutospellerConfiguration::ignoredWords, { value -> this@AutospellerConfiguration.ignoredWords = value })
-                        controller(StringControllerBuilder::create)
-                        initial("")
-                        build()
-                    }
-                )
+					build()
+				})
+
+				option(
+					with(ListOption.createBuilder<String>()) {
+						name("text.config.autospeller.option.ignored_words".asTranslatable())
+						binding(listOf<String>(), this@AutospellerConfiguration::ignoredWords, { value -> this@AutospellerConfiguration.ignoredWords = value })
+						controller(StringControllerBuilder::create)
+						initial("")
+						build()
+					}
+				)
 
                 build()
             })
@@ -86,6 +96,15 @@ class AutospellerConfiguration: LinterConfigurationInterface {
             category(with(ConfigCategory.createBuilder()) {
                 name("text.config.autospeller.category.gui".asTranslatable())
                 tooltip("text.config.autospeller.category.gui.description".asTranslatable())
+
+				option(
+					with(Option.createBuilder<Int>()) {
+						name("text.config.autospeller.option.max_suggestions".asTranslatable())
+						controller({ opt -> IntegerSliderControllerBuilder.create(opt).range(1, 5).step(1) })
+						binding(4, this@AutospellerConfiguration::maxSuggestions, { max -> this@AutospellerConfiguration.maxSuggestions = max })
+						build()
+					}
+				)
 
                 option(with(Option.createBuilder<Color>()) {
                     controller(ColorControllerBuilder::create)
