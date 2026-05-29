@@ -9,11 +9,13 @@ While the mod is still in it's early development, it already provides grammar, p
 
 ---
 ### Language & Version Support
-Autospeller currently only supports Minecraft version **26.1.2** and the **Fabric** mod loader, but is planned to support futher Minecraft releases and be compatible with **NeoForge**. Forge support is not planned.
+Autospeller currently only supports Minecraft version **26.1** and the **Fabric** and **NeoForge** modloaders. Forge support is not planned.
 
-| Version  | Fabric | NeoForge    |
-|----------|--------|-------------|
-| **26.1** | ✅      | ❌ (Planned) |
+Further Minecraft versions will gain support as they roll out.
+
+| Version  | Fabric | NeoForge |
+|----------|--------|----------|
+| **26.1** | ✅      | ✅        |
 
 Autospeller currently only supports **French** and **English** (default).
 
