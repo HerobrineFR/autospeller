@@ -17,5 +17,6 @@
   "text.level.autospeller.default": "Par défaut",
   "text.level.autospeller.picky": "Strict",
   "text.level.autospeller.creative": "Créatif",
-  "text.level.autospeller.elegant": "Élégant"
+  "text.level.autospeller.elegant": "Élégant",
+  "text.config.autospeller.language_level": "Niveau de correction"
 }

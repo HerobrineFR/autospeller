@@ -19,5 +19,6 @@
   "text.language.autospeller.english": "English",
   "text.config.autospeller.option.max_suggestions": "Max. suggestions",
 
-  "text.config.autospeller.selected_language": "Language"
+  "text.config.autospeller.selected_language": "Language",
+  "text.config.autospeller.language_level": "Correction level"
 }
