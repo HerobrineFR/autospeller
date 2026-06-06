@@ -136,7 +136,11 @@ object ChatRenderer {
                         lintSuggestion
                     )
 
-                    val screen = Minecraft.getInstance().screen
+					//? if >= 26.2 {
+                    /*val screen = Minecraft.getInstance().gui.screen()
+					*///? } else {
+					val screen = Minecraft.getInstance().screen
+					//? }
                     if (screen != null) {
 
                         with(screen) {

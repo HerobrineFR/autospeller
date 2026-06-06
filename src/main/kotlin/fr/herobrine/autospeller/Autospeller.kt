@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory
 
 object Autospeller {
     const val MOD_ID = /*$ mod_id*/"autospeller";
-	const val MOD_VERSION = /*$ mod_version*/"1.0";
+	const val MOD_VERSION = /*$ mod_version*/"1.2";
 	const val MOD_FRIENDLY_NAME =   /*$ mod_name*/"Autospeller";
 
 	private val PLATFORM: Platform = createPlatformInstance()

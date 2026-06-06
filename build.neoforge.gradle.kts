@@ -76,6 +76,12 @@ neoForge {
 repositories {
 	mavenCentral()
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+
+	maven("https://prmaven.neoforged.net/NeoForge/pr3198") {
+		content {
+			includeModule("net.neoforged", "neoforge")
+		}
+	}
 }
 
 val transitiveInclude by configurations.creating {
