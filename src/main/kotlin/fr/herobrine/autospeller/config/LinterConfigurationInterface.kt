@@ -1,6 +1,7 @@
 package fr.herobrine.autospeller.config
 
 import fr.herobrine.autospeller.language.Language
+import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import java.awt.Color
@@ -23,6 +24,11 @@ interface LinterConfigurationInterface {
 	 * Debounce delay of the linter, in milliseconds.
 	 */
 	var debounceDelay: Int
+
+	/**
+	 * The language level used by the linter for checks.
+	 */
+	var languageLevel: LanguageLevel
 
     /**
      * Selected language.

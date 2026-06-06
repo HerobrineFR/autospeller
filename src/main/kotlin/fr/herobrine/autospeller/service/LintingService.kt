@@ -42,7 +42,7 @@ data class LintingService(
                     null
                 }
                 true -> {
-                    val result = this.getInputProcessor().process(input = ticket.input, maxSuggestions = this.linterConfiguration.maxSuggestions)
+                    val result = this.getInputProcessor().process(input = ticket.input, languageLevel = this.linterConfiguration.languageLevel, maxSuggestions = this.linterConfiguration.maxSuggestions)
                     session.lastCheck = Clock.System.now()
                     session.lastInput = ticket.input
 

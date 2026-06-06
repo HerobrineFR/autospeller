@@ -20,6 +20,7 @@ import fr.herobrine.autospeller.ext.asLiteral
 import fr.herobrine.autospeller.ext.asTranslatable
 import fr.herobrine.autospeller.ignore.IgnoreList
 import fr.herobrine.autospeller.language.Language
+import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.language.WordSet
 import fr.herobrine.autospeller.service.IgnoreFilter
@@ -45,7 +46,11 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 	@SerialEntry(value = "debounce_delay")
 	override var debounceDelay: Int = 200
 
+	@SerialEntry(value = "max_suggestions")
 	override var maxSuggestions: Int = 4
+
+	@SerialEntry(value = "language_level")
+	override var languageLevel: LanguageLevel = LanguageLevel.DEFAULT
 
     private var inputProcessor: LanguageToolInputProcessor? = null
 
@@ -78,6 +83,15 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 							name("text.config.autospeller.selected_language".asTranslatable())
 							controller({ opt -> EnumControllerBuilder.create(opt).enumClass(Language::class.java) })
 							binding(Language.ENGLISH, this@AutospellerConfiguration::language, { lang -> this@AutospellerConfiguration.language = lang })
+							build()
+						}
+					)
+
+					option(
+						with(Option.createBuilder<LanguageLevel>()) {
+							name("text.config.autospeller.language_level".asTranslatable())
+							controller({ opt -> EnumControllerBuilder.create(opt).enumClass(LanguageLevel::class.java) })
+							binding(LanguageLevel.DEFAULT, this@AutospellerConfiguration::languageLevel, { lang -> this@AutospellerConfiguration.languageLevel = lang })
 							build()
 						}
 					)
@@ -136,6 +150,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
             save({
                 MOD_CONFIG_HANDLER.save()
+				this@AutospellerConfiguration.inputProcessor?.languageLevel = this@AutospellerConfiguration.languageLevel
 
 				if(this@AutospellerConfiguration.inputProcessor?.language != this@AutospellerConfiguration.language) {
 					this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
@@ -156,7 +171,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
         return when(this.inputProcessor == null) {
             false -> this.inputProcessor!!
             else -> {
-                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter())
+                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter(), languageLevel = this.languageLevel)
 
                 return with(this.inputProcessor!!) {
                     language = this@AutospellerConfiguration.language

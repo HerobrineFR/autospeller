@@ -13,5 +13,10 @@
   "text.config.autospeller.selected_language": "Langue",
   "text.config.autospeller.group.language": "Options de langue",
   "text.config.autospeller.option.max_suggestions": "Suggestions max.",
-  "text.config.autospeller.option.debounce_delay": "Temps de rebond"
+  "text.config.autospeller.option.debounce_delay": "Temps de rebond",
+  "text.level.autospeller.default": "Par défaut",
+  "text.level.autospeller.picky": "Strict",
+  "text.level.autospeller.creative": "Créatif",
+  "text.level.autospeller.elegant": "Élégant",
+  "text.config.autospeller.language_level": "Niveau de correction"
 }
