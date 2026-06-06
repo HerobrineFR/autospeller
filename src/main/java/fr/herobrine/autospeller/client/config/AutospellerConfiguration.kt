@@ -150,6 +150,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
             save({
                 MOD_CONFIG_HANDLER.save()
+				this@AutospellerConfiguration.inputProcessor?.languageLevel = this@AutospellerConfiguration.languageLevel
 
 				if(this@AutospellerConfiguration.inputProcessor?.language != this@AutospellerConfiguration.language) {
 					this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
@@ -170,7 +171,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
         return when(this.inputProcessor == null) {
             false -> this.inputProcessor!!
             else -> {
-                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter())
+                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter(), languageLevel = this.languageLevel)
 
                 return with(this.inputProcessor!!) {
                     language = this@AutospellerConfiguration.language

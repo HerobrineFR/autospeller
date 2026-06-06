@@ -1,5 +1,6 @@
 package fr.herobrine.autospeller.service
 
+import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.TokenInputElement
 import fr.herobrine.autospeller.linting.LintingResult
 
@@ -15,7 +16,7 @@ interface InputProcessor {
      *
      * @return A result which can include a list of suggestions.
      */
-    fun process(input: TokenInputElement, maxSuggestions: Int = 4): LintingResult
+    fun process(input: TokenInputElement, languageLevel: LanguageLevel = LanguageLevel.DEFAULT, maxSuggestions: Int = 4): LintingResult
 
     /**
      * Tells if the input processor is ready.

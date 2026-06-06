@@ -3,6 +3,7 @@ package fr.herobrine.autospeller.client.linting
 import fr.herobrine.autospeller.Autospeller
 import fr.herobrine.autospeller.Autospeller.logger
 import fr.herobrine.autospeller.language.Language
+import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.TokenInputElement
 import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.linting.LintingResult
@@ -24,6 +25,7 @@ import java.util.concurrent.CompletableFuture
  */
 data class LanguageToolInputProcessor(
     private var languageTool: JLanguageTool? = null,
+	var languageLevel: LanguageLevel,
 	private val ignoreFilter: IgnoreFilter?
 ): InputProcessor {
     private var ready = false
@@ -65,7 +67,7 @@ data class LanguageToolInputProcessor(
      * Processes the input.
      * @return the result of the linting process.
      */
-    override fun process(input: TokenInputElement, maxSuggestions: Int): LintingResult {
+    override fun process(input: TokenInputElement, languageLevel: LanguageLevel, maxSuggestions: Int): LintingResult {
         val suggestions = arrayListOf<TextSuggestion>()
 
         if(this.languageTool == null) {
@@ -74,7 +76,7 @@ data class LanguageToolInputProcessor(
         }
 
         try {
-            val check = languageTool?.check(input.input)
+            val check = languageTool?.check(input.input, languageLevel.level)
             check?.forEach { match ->
                 var replacements = match.suggestedReplacements
                 if(replacements.size > maxSuggestions) {
