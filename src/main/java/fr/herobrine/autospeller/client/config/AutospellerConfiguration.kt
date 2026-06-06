@@ -136,7 +136,10 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
             save({
                 MOD_CONFIG_HANDLER.save()
-                this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
+
+				if(this@AutospellerConfiguration.inputProcessor?.language != this@AutospellerConfiguration.language) {
+					this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
+				}
             })
 
             return@with build().generateScreen(parentScreen)
