@@ -46,6 +46,7 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 	@SerialEntry(value = "debounce_delay")
 	override var debounceDelay: Int = 200
 
+	@SerialEntry(value = "max_suggestions")
 	override var maxSuggestions: Int = 4
 
 	@SerialEntry(value = "language_level")
