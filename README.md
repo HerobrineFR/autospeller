@@ -1,4 +1,6 @@
 # Autospeller
+[![Modrinth](https://img.shields.io/badge/dynamic/json?label=Available%20for&color=4bab62&query=version&url=https://api.blueish.dev/api/minecraft/version?id=rNmAABDq)](https://modrinth.com/mod/autospeller)
+
 #### This mod is still in beta, and might come with some bugs and slowdowns !
 ### Requires [Mod Menu](https://modrinth.com/mod/modmenu), [Yet Another Config Library (YACL)](https://modrinth.com/mod/yacl) and [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
 Autospeller provides text highlighting and suggestions to Minecraft's chat.
