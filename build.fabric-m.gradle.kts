@@ -29,7 +29,7 @@ platform {
 	loader = "fabric-m"
 	dependencies {
 		required("minecraft") {
-			fabricLikeVersionRange = prop("deps.minecraft")
+			fabricLikeVersionRange = prop("deps.minecraft").replace("-pre-", "-pre.")
 		}
 		required("fabric-api") {
 			slug("fabric-api")
