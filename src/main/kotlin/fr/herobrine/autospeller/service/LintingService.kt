@@ -17,7 +17,7 @@ import kotlin.time.toJavaDuration
  */
 data class LintingService(
     var linterConfiguration: LinterConfigurationInterface,
-    var debounce: Duration = 200.milliseconds.toJavaDuration(),
+    var debounce: Duration = linterConfiguration.debounceDelay.milliseconds.toJavaDuration(),
 ) {
 
     init {

@@ -26,6 +26,8 @@ import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import net.minecraft.client.gui.screens.Screen
 import java.awt.Color
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 class AutospellerConfiguration: LinterConfigurationInterface {
     @SerialEntry(value = "enable_mod")
@@ -39,6 +41,9 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
     @SerialEntry(value = "language")
     override var language = Language.ENGLISH
+
+	@SerialEntry(value = "debounce_delay")
+	override var debounceDelay: Int = 200
 
 	override var maxSuggestions: Int = 4
 
@@ -106,6 +111,18 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 					}
 				)
 
+				option(
+					with(Option.createBuilder<Int>()) {
+						name("text.config.autospeller.option.debounce_delay".asTranslatable())
+						controller({ opt -> IntegerSliderControllerBuilder.create(opt).range(100, 900).step(50).formatValue { value ->
+							return@formatValue "$value ms".asLiteral()
+						} })
+
+						binding(200, this@AutospellerConfiguration::debounceDelay, { delay -> this@AutospellerConfiguration.debounceDelay = delay })
+						build()
+					}
+				)
+
                 option(with(Option.createBuilder<Color>()) {
                     controller(ColorControllerBuilder::create)
                     name("text.config.autospeller.option.underline_color".asTranslatable())
@@ -119,7 +136,10 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
             save({
                 MOD_CONFIG_HANDLER.save()
-                this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
+
+				if(this@AutospellerConfiguration.inputProcessor?.language != this@AutospellerConfiguration.language) {
+					this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
+				}
             })
 
             return@with build().generateScreen(parentScreen)

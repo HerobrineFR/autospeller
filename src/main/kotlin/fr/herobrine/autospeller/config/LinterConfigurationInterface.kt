@@ -4,6 +4,7 @@ import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import java.awt.Color
+import kotlin.time.Duration
 
 interface LinterConfigurationInterface {
     /**
@@ -17,6 +18,11 @@ interface LinterConfigurationInterface {
      * Syntax highlighting color.
      */
     var underlineColor: Color
+
+	/**
+	 * Debounce delay of the linter, in milliseconds.
+	 */
+	var debounceDelay: Int
 
     /**
      * Selected language.

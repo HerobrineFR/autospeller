@@ -12,5 +12,6 @@
 
   "text.config.autospeller.selected_language": "Langue",
   "text.config.autospeller.group.language": "Options de langue",
-  "text.config.autospeller.option.max_suggestions": "Suggestions max."
+  "text.config.autospeller.option.max_suggestions": "Suggestions max.",
+  "text.config.autospeller.option.debounce_delay": "Temps de rebond"
 }
