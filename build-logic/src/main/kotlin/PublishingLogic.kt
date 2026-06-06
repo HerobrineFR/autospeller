@@ -111,6 +111,7 @@ private fun ModPublishExtension.modrinth(
 private fun ModPublishExtension.curseforge(
 	ctx: Context, additionalVersions: List<String>, accessToken: String?, deps: DependenciesConfig
 ) = curseforge {
+	return@curseforge
 	projectId = project.env("PUB_CURSEFORGE_PROJECT_ID")
 
 	this.accessToken = accessToken
