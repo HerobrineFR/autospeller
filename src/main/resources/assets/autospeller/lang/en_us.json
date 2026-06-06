@@ -10,6 +10,11 @@
   "text.config.autospeller.gui.loading_text": "Loading Autospeller...",
   "text.config.autospeller.group.language": "Language Options",
 
+  "text.level.autospeller.default": "Default",
+  "text.level.autospeller.picky": "Picky",
+  "text.level.autospeller.creative": "Creative",
+  "text.level.autospeller.elegant": "Elegant",
+
   "text.language.autospeller.french": "French",
   "text.language.autospeller.english": "English",
   "text.config.autospeller.option.max_suggestions": "Max. suggestions",
