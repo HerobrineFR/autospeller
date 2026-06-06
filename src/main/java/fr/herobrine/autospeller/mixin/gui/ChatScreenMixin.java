@@ -56,6 +56,11 @@ public class ChatScreenMixin {
 
         if(lintingService.getLinterConfiguration().getEnableMod() && input.isVisible()) {
             this.initializeSession();
+			var textInput = input.getValue();
+
+			if(textInput.startsWith("/")) {
+				return;
+			}
 
             if(lintingService.getInputProcessor().isPending()) {
                 ChatRenderer.INSTANCE.displayInputProcessorPendingState(
@@ -68,7 +73,6 @@ public class ChatScreenMixin {
             }
 
             if(this.isTaskAvailable()) {
-                var textInput = input.getValue();
                 var lintingDebounce = lintingService.getDebounce();
                 var lintingTicket = new LintingTicket(
                         new TokenInputElement(textInput),
