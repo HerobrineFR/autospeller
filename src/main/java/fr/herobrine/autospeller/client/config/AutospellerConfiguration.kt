@@ -37,6 +37,9 @@ class AutospellerConfiguration: LinterConfigurationInterface {
     @SerialEntry(value = "ignored_words")
     var ignoredWords = emptyList<String>()
 
+	@SerialEntry(value = "builtin_dictionary")
+	var builtinDictionary = emptyList<String>()
+
     @SerialEntry(value = "underline_color")
     override var underlineColor = Color.RED
 
@@ -186,7 +189,9 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 	override fun getIgnoreFilter(): IgnoreFilter? {
 		return IgnoreFilter(
 			IgnoreList(
-				WordSet(this.ignoredWords.map { w -> WordElement(w) })
+				WordSet(this.ignoredWords.map { w -> WordElement(w) }.plus(
+					this.builtinDictionary.map { w -> WordElement(w) }
+				))
 			)
 		)
 	}
