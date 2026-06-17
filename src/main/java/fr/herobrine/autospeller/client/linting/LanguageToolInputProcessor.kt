@@ -52,7 +52,7 @@ data class LanguageToolInputProcessor(
 					UserConfig(this.ignoreFilter?.ignoreList?.wordSet?.getElements()?.map { el -> el.word.lowercase() } ?: emptyList())
                 )
 
-                languageTool.check("")
+                languageTool.check("The apples are green")
 
                 this.languageTool = languageTool
 
