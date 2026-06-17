@@ -98,7 +98,6 @@ private fun ModPublishExtension.modrinth(
 	projectId = project.env("PUB_MODRINTH_PROJECT_ID")
 
 	this.accessToken = accessToken
-	minecraftVersions.addAll(listOf(ctx.currentMcVersion.replace("26.2", "26.2-pre-4")) + additionalVersions)
 
 	if (!staging) {
 		deps.required.forEach { dep -> whenNotNull(dep.modrinth) { requires(it) } }
