@@ -17,8 +17,7 @@ object AutospellerClient {
 		MOD_CONFIG_HANDLER.load()
 		val config = MOD_CONFIG_HANDLER.instance()
 
-		val builtinDict = BuiltinDictionary.load()
-		RemoteDictionaryUpdater.update(config.dictionaryUrl, builtinDict)
+		RemoteDictionaryUpdater.update(config.dictionaryUrl, BuiltinDictionary.load())
 
 		service = LintingService(config)
 		service.linterConfiguration.createInputProcessor()
