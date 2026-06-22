@@ -7,6 +7,8 @@ import kotlin.time.Instant
  * Session, of which the state allows to define the linting process information.
  */
 interface LintingSession {
+	var sessionMode: SessionMode
+
     /**
      * The last time the linter ran a check on an input.
      */

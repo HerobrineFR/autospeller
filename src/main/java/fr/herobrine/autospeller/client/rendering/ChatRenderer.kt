@@ -7,6 +7,7 @@ import fr.herobrine.autospeller.client.ext.getFont
 import fr.herobrine.autospeller.client.ext.visibleText
 import fr.herobrine.autospeller.ext.asLiteral
 import fr.herobrine.autospeller.ext.asTranslatable
+import fr.herobrine.autospeller.linting.SessionMode
 import fr.herobrine.autospeller.linting.TextSuggestion
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
@@ -15,6 +16,8 @@ import net.minecraft.client.gui.TextAlignment
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.font.FontManager
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 import net.minecraft.resources.Identifier
@@ -73,13 +76,13 @@ object ChatRenderer {
         renderingTicket: ChatRenderingTicket,
         pointerPosition: Vector2i,
         renderTooltips: Boolean
-    ): TooltipWidget? {
+    ): ChatTooltipWidget? {
         val textInput = renderingTicket.lintingSession.lastInput?.input ?: return null
 
         val editBox = renderingTicket.lintingSession.editBox
         val displayedText = editBox.visibleText()
 
-        var highlightedReplacement: TooltipWidget? = null
+        var highlightedReplacement: ChatTooltipWidget? = null
 
         fun textWidth(text: String): Int {
             return editBox.getFont().width(text)
@@ -104,18 +107,6 @@ object ChatRenderer {
                 val underlineStartX = textWidth(previousRenderedText) + editBox.x
                 val underlineEndX = underlineStartX + textWidth(textToken)
 
-                // Draws red underline beneath text.
-                graphics.horizontalLine(
-                    underlineStartX,
-                    underlineEndX,
-                    (editBox.y + editBox.height) - 4,
-                    AutospellerClient.service.linterConfiguration.underlineColor.rgb
-                )
-
-                if(!renderTooltips) {
-                    return@forEach
-                }
-
                 val tooltipPositioner = TextSuggestionTooltipPositioner()
                 var currentIteration = 1
 
@@ -127,71 +118,119 @@ object ChatRenderer {
                     )
                 }
 
-                lintSuggestion.suggestedReplacements.forEach { suggestion ->
-                    var tooltipStyle: Identifier? = null
-                    val tooltipWidth = textWidth(suggestion)
+				if(renderingTicket.lintingSession.sessionMode == SessionMode.DICTIONARY_ADDING) {
+					var additionStyle = Identifier.parse("autospeller:addition")
+					val originVector = Vector2i(underlineStartX, editBox.y)
+					val tooltipWidth = textWidth(textToken)
 
-                    fun createTooltipWidget(): TooltipWidget = TooltipWidget(
-                        suggestion,
-                        lintSuggestion
-                    )
+					val tooltipInfo = TooltipRenderingInfo(
+						originVector,
+						Vector2i(
+							tooltipWidth,
+							15
+						)
+					)
 
-					//? if >= 26.2 {
-                    /*val screen = Minecraft.getInstance().gui.screen()
-					*///? } else {
-					val screen = Minecraft.getInstance().screen
-					//? }
-                    if (screen != null) {
+					val widgetBoundingBox = tooltipInfo.createBoundingBox()
+					if(widgetBoundingBox.contains(pointerPosition)) {
+						highlightedReplacement = AdditionTooltipWidget(textToken)
+						graphics.requestCursor(CursorTypes.POINTING_HAND)
 
-                        with(screen) {
-                            val originVector = originVec()
+						additionStyle = Identifier.parse("autospeller:addition_active")
+					}
 
-                            tooltipPositioner.positionTooltip(
-                                width,
-                                height,
-                                originVector,
-                                tooltipWidth,
-                                12
-                            )
+					renderingQueue.add {
+						graphics.tooltip(
+							editBox.getFont(),
+							listOf(ClientTooltipComponent.create(
+								FormattedCharSequence.forward(textToken, Style.EMPTY)
+							)),
+							underlineStartX, editBox.y,
+							tooltipPositioner,
+							additionStyle
+						)
+					}
+				}
 
-                            val tooltipInfo = TooltipRenderingInfo(
-                                originVector,
-                                Vector2i(
-                                    tooltipWidth,
-                                    15
-                                )
-                            )
+				if(renderingTicket.lintingSession.sessionMode == SessionMode.LINTING) {
+					if(!renderTooltips) {
+						return@forEach
+					}
 
-                            val boundingBox = tooltipInfo.createBoundingBox()
+					// Draws red underline beneath text.
+					graphics.horizontalLine(
+						underlineStartX,
+						underlineEndX,
+						(editBox.y + editBox.height) - 4,
+						AutospellerClient.service.linterConfiguration.underlineColor.rgb
+					)
 
-                            if(boundingBox.contains(pointerPosition)) {
-                                highlightedReplacement = createTooltipWidget()
-                            }
-                        }
-                    }
+					lintSuggestion.suggestedReplacements.forEach { suggestion ->
+						var tooltipStyle: Identifier? = null
+						val tooltipWidth = textWidth(suggestion)
 
-                    val or = originVec()
+						fun createTooltipWidget(): TooltipWidget = TooltipWidget(
+							suggestion,
+							lintSuggestion
+						)
 
-                    renderingQueue.add {
-                        if(highlightedReplacement == createTooltipWidget()) {
-                            graphics.requestCursor(CursorTypes.POINTING_HAND)
-                            tooltipStyle = Identifier.parse("autospeller:active")
-                        }
+						//? if >= 26.2 {
+						/*val screen = Minecraft.getInstance().gui.screen()
+						*///? } else {
+						val screen = Minecraft.getInstance().screen
+						//? }
+						if (screen != null) {
 
-                        graphics.tooltip(
-                            editBox.getFont(),
-                            listOf(ClientTooltipComponent.create(
-                                FormattedCharSequence.forward(suggestion, Style.EMPTY)
-                            )),
-                            or.x,
-                            or.y,
-                            tooltipPositioner,
-                            tooltipStyle
-                        )
-                    }
+							with(screen) {
+								val originVector = originVec()
 
-                    currentIteration++
-                }
+								tooltipPositioner.positionTooltip(
+									width,
+									height,
+									originVector,
+									tooltipWidth,
+									12
+								)
+
+								val tooltipInfo = TooltipRenderingInfo(
+									originVector,
+									Vector2i(
+										tooltipWidth,
+										15
+									)
+								)
+
+								val boundingBox = tooltipInfo.createBoundingBox()
+
+								if(boundingBox.contains(pointerPosition)) {
+									highlightedReplacement = createTooltipWidget()
+								}
+							}
+						}
+
+						val or = originVec()
+
+						renderingQueue.add {
+							if(highlightedReplacement == createTooltipWidget()) {
+								graphics.requestCursor(CursorTypes.POINTING_HAND)
+								tooltipStyle = Identifier.parse("autospeller:active")
+							}
+
+							graphics.tooltip(
+								editBox.getFont(),
+								listOf(ClientTooltipComponent.create(
+									FormattedCharSequence.forward(suggestion, Style.EMPTY)
+								)),
+								or.x,
+								or.y,
+								tooltipPositioner,
+								tooltipStyle
+							)
+						}
+
+						currentIteration++
+					}
+				}
             }
         }
 
@@ -222,9 +261,14 @@ object ChatRenderer {
      * @param suggestion Suggestion from which the widget comes from
      */
     data class TooltipWidget(
-        val text: String,
+        override val text: String,
         val suggestion: TextSuggestion
-    ) {
+    ): ChatTooltipWidget {
 
     }
+
+	data class AdditionTooltipWidget(
+		override val text: String
+	): ChatTooltipWidget {
+	}
 }

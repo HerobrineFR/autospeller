@@ -196,4 +196,14 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 			)
 		)
 	}
+
+	override fun appendDynamicDictionary(list: List<WordElement>) {
+		val newList = arrayListOf<String>()
+		newList.addAll(this.ignoredWords)
+		newList.addAll(
+			list.map { wordElement -> wordElement.word.lowercase() }
+		)
+
+		this.ignoredWords = newList
+	}
 }

@@ -1,7 +1,9 @@
 package fr.herobrine.autospeller.service
 
 import fr.herobrine.autospeller.Autospeller
+import fr.herobrine.autospeller.client.config.MOD_CONFIG_HANDLER
 import fr.herobrine.autospeller.config.LinterConfigurationInterface
+import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.LintingSession
 import fr.herobrine.autospeller.linting.LintingTicket
@@ -19,10 +21,18 @@ data class LintingService(
     var linterConfiguration: LinterConfigurationInterface,
     var debounce: Duration = linterConfiguration.debounceDelay.milliseconds.toJavaDuration(),
 ) {
+	val dynamicDictionary = arrayListOf<WordElement>()
 
     init {
         Autospeller.logger.info("[Autospeller] Linting service created")
     }
+
+	fun addWord(str: String) {
+		this.dynamicDictionary.add(WordElement(str))
+		this.linterConfiguration.appendDynamicDictionary(this.dynamicDictionary)
+
+		MOD_CONFIG_HANDLER.save()
+	}
 
     fun getInputProcessor() = linterConfiguration.createInputProcessor()
 
@@ -42,7 +52,7 @@ data class LintingService(
                     null
                 }
                 true -> {
-                    val result = this.getInputProcessor().process(input = ticket.input, languageLevel = this.linterConfiguration.languageLevel, maxSuggestions = this.linterConfiguration.maxSuggestions)
+                    val result = this.getInputProcessor().process(input = ticket.input, languageLevel = this.linterConfiguration.languageLevel, maxSuggestions = this.linterConfiguration.maxSuggestions, dynamicDictionary = this.dynamicDictionary)
                     session.lastCheck = Clock.System.now()
                     session.lastInput = ticket.input
 

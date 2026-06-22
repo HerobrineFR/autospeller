@@ -2,6 +2,7 @@ package fr.herobrine.autospeller.config
 
 import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.LanguageLevel
+import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import java.awt.Color
@@ -41,4 +42,6 @@ interface LinterConfigurationInterface {
     fun createInputProcessor(): InputProcessor
 
 	fun getIgnoreFilter(): IgnoreFilter?
+
+	fun appendDynamicDictionary(list: List<WordElement>)
 }
