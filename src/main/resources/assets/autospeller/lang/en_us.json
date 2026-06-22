@@ -1,7 +1,8 @@
 {
   "text.config.autospeller.title": "Autospeller Configuration",
   "text.config.autospeller.option.enable_mod": "Enable mod",
-  "text.config.autospeller.option.ignored_words": "Custom dictionnary (Requires restart)",
+  "text.config.autospeller.option.ignored_words": "Custom dictionary",
+  "text.config.autospeller.option.dictionary_url": "Remote dictionary URL",
   "text.config.autospeller.category.general": "General",
   "text.config.autospeller.category.gui": "GUI",
   "text.config.autospeller.category.gui.description": "Settings related to the mods's graphical interface.",

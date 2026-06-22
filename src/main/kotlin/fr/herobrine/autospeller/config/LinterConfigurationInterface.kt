@@ -36,11 +36,6 @@ interface LinterConfigurationInterface {
     var language: Language
 
     /**
-     * Filter of words that should be ignored by the linter.
-     */
-    fun ignoreFilter(): IgnoreFilter
-
-    /**
      * Creates an input processor.
      */
     fun createInputProcessor(): InputProcessor
