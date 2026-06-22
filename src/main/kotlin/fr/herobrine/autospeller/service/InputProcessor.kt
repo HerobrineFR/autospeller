@@ -27,4 +27,6 @@ interface InputProcessor {
 	 * Tells if the processor is in a pending state.
 	 */
 	fun isPending(): Boolean
+
+	fun loadProcessor()
 }

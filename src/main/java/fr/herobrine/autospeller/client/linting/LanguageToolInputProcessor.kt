@@ -1,11 +1,9 @@
 package fr.herobrine.autospeller.client.linting
 
-import fr.herobrine.autospeller.Autospeller
 import fr.herobrine.autospeller.Autospeller.logger
 import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.TokenInputElement
-import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.TextSuggestion
 import fr.herobrine.autospeller.service.IgnoreFilter
@@ -15,7 +13,6 @@ import org.languagetool.ResultCache
 import org.languagetool.UserConfig
 import org.languagetool.language.AmericanEnglish
 import org.languagetool.language.French
-import org.languagetool.rules.RuleMatch
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -33,10 +30,10 @@ data class LanguageToolInputProcessor(
     var language: Language = Language.ENGLISH
         set(value) {
             field = value
-            this.loadLanguage()
+            this.loadProcessor()
         }
 
-    fun loadLanguage() {
+    override fun loadProcessor() {
         CompletableFuture.runAsync {
             this.ready = false
 			this.languageTool = null
@@ -57,6 +54,7 @@ data class LanguageToolInputProcessor(
                 this.languageTool = languageTool
 
                 logger.info("[Linter] LanguageTool was loaded successfully.")
+				this.ready = true
             }catch(e: Exception){
                 logger.error("[Linter] Failed to load LanguageTool.", e)
             }
@@ -99,7 +97,6 @@ data class LanguageToolInputProcessor(
             logger.info("No suggestions were found")
         }
 
-		this.ready = true
         return LintingResult(suggestions)
     }
 

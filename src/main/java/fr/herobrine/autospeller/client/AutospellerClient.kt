@@ -14,5 +14,7 @@ object AutospellerClient {
 		service = LintingService(
 			MOD_CONFIG_HANDLER.instance()
 		)
+		
+		service.linterConfiguration.createInputProcessor()
 	}
 }
