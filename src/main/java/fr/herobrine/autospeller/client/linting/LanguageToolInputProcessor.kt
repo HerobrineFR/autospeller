@@ -4,6 +4,7 @@ import fr.herobrine.autospeller.Autospeller.logger
 import fr.herobrine.autospeller.language.Language
 import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.TokenInputElement
+import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.linting.LintingResult
 import fr.herobrine.autospeller.linting.TextSuggestion
 import fr.herobrine.autospeller.service.IgnoreFilter
@@ -65,7 +66,12 @@ data class LanguageToolInputProcessor(
      * Processes the input.
      * @return the result of the linting process.
      */
-    override fun process(input: TokenInputElement, languageLevel: LanguageLevel, maxSuggestions: Int): LintingResult {
+    override fun process(
+	    input: TokenInputElement,
+	    languageLevel: LanguageLevel,
+	    maxSuggestions: Int,
+	    dynamicDictionary: Collection<WordElement>?
+    ): LintingResult {
         val suggestions = arrayListOf<TextSuggestion>()
 
         if(this.languageTool == null) {
@@ -76,25 +82,25 @@ data class LanguageToolInputProcessor(
         try {
             val check = languageTool?.check(input.input, languageLevel.level)
             check?.forEach { match ->
+				val originalString = input.input.substring(match.fromPos, match.toPos)
+
                 var replacements = match.suggestedReplacements
                 if(replacements.size > maxSuggestions) {
                     replacements = replacements.slice(0..<maxSuggestions)
                 }
 
-                suggestions.add(
-                    TextSuggestion(
-                        match.fromPos,
-                        match.toPos,
-                        replacements
-                    )
-                )
+                if(!(dynamicDictionary?.contains(WordElement(originalString)) ?: false)) {
+					suggestions.add(
+						TextSuggestion(
+							match.fromPos,
+							match.toPos,
+							replacements
+						)
+					)
+				}
             }
         }catch (e: Exception){
             logger.error("Error during linting", e)
-        }
-
-        if(suggestions.isEmpty()) {
-            logger.info("No suggestions were found")
         }
 
         return LintingResult(suggestions)

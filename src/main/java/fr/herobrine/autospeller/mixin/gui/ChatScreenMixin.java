@@ -1,20 +1,27 @@
 package fr.herobrine.autospeller.mixin.gui;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.kikugie.fletching_table.annotation.MixinEnvironment;
 import fr.herobrine.autospeller.client.AutospellerClient;
 import fr.herobrine.autospeller.client.linting.ChatLintingSession;
 import fr.herobrine.autospeller.client.rendering.ChatRenderer;
 import fr.herobrine.autospeller.client.rendering.ChatRenderingTicket;
+import fr.herobrine.autospeller.client.rendering.ChatTooltipWidget;
 import fr.herobrine.autospeller.language.TokenInputElement;
+import fr.herobrine.autospeller.language.WordElement;
 import fr.herobrine.autospeller.linting.LintingResult;
 import fr.herobrine.autospeller.linting.LintingTicket;
+import fr.herobrine.autospeller.linting.SessionMode;
 import kotlin.time.Clock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import org.joml.Vector2i;
 import org.jspecify.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
 
 @MixinEnvironment(type = MixinEnvironment.Env.CLIENT)
 @Mixin(ChatScreen.class)
-public class ChatScreenMixin {
+public abstract class ChatScreenMixin {
 
     @Shadow
     protected EditBox input;
@@ -35,7 +42,10 @@ public class ChatScreenMixin {
     @Shadow
     protected boolean isDraft;
 
-    @Unique @Nullable
+	@Shadow
+	public abstract boolean keyPressed(KeyEvent event);
+
+	@Unique @Nullable
     private ChatRenderingTicket chatRenderingTicket;
 
     @Unique @Nullable
@@ -45,7 +55,7 @@ public class ChatScreenMixin {
     private CompletableFuture<LintingResult> lintingTask = null;
 
     @Unique
-    private ChatRenderer.TooltipWidget selectedSuggestion = null;
+    private ChatTooltipWidget selectedSuggestion = null;
 
     @Inject(
             method = {"extractRenderState"},
@@ -61,6 +71,11 @@ public class ChatScreenMixin {
 			if(textInput.startsWith("/")) {
 				return;
 			}
+
+			var windowHandle = Minecraft.getInstance().getWindow().handle();
+			var leftAltPressed = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_LEFT_ALT) == GLFW.GLFW_PRESS;
+
+			this.lintingSession.setSessionMode(leftAltPressed ? SessionMode.DICTIONARY_ADDING : SessionMode.LINTING);
 
             if(lintingService.getInputProcessor().isPending()) {
                 ChatRenderer.INSTANCE.displayInputProcessorPendingState(
@@ -109,10 +124,16 @@ public class ChatScreenMixin {
     )
     private void onClick(MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> cir) {
         if(selectedSuggestion != null) {
-            ChatRenderer.INSTANCE.replaceInput(
-                    this.selectedSuggestion,
-                    this.input
-            );
+            if(this.selectedSuggestion instanceof ChatRenderer.TooltipWidget suggestionWidget) {
+				ChatRenderer.INSTANCE.replaceInput(
+						suggestionWidget,
+						this.input
+				);
+			}else if(this.selectedSuggestion instanceof ChatRenderer.AdditionTooltipWidget additionWidget) {
+				var lintingService = AutospellerClient.service;
+				lintingService.addWord(additionWidget.getText());
+				this.lintingSession.setLastInput(null);
+			}
 
             cir.cancel();
         }
@@ -125,7 +146,7 @@ public class ChatScreenMixin {
     private void initializeSession() {
         if(this.lintingSession == null || this.lintingSession.getEditBox() != this.input) {
             this.lintingSession = new ChatLintingSession(
-                    Clock.System.INSTANCE.now(), null, this.input
+                    Clock.System.INSTANCE.now(), null, this.input, SessionMode.LINTING
             );
         }
     }

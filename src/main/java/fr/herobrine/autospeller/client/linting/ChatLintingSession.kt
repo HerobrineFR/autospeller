@@ -3,6 +3,7 @@ package fr.herobrine.autospeller.client.linting
 import fr.herobrine.autospeller.language.TokenInputElement
 import fr.herobrine.autospeller.linting.LintingSession
 import fr.herobrine.autospeller.linting.LintingTicket
+import fr.herobrine.autospeller.linting.SessionMode
 import net.minecraft.client.gui.components.EditBox
 import java.time.Duration
 import kotlin.time.Clock
@@ -15,7 +16,8 @@ import kotlin.time.toKotlinDuration
 data class ChatLintingSession(
     override var lastCheck: Instant? = null,
     override var lastInput: TokenInputElement?,
-    val editBox: EditBox
+    val editBox: EditBox,
+    override var sessionMode: SessionMode = SessionMode.LINTING
 ): LintingSession {
     override fun shouldLint(ticket: LintingTicket): Boolean = ticket.input.input.length > 1 && !shouldDebounce(ticket.debounceDuration) && ticket.input.input != lastInput?.input
 
