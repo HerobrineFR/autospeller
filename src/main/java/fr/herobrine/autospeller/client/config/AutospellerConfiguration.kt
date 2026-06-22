@@ -16,6 +16,8 @@ import dev.isxander.yacl3.gui.controllers.ColorController
 import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController
 import fr.herobrine.autospeller.client.linting.LanguageToolInputProcessor
 import fr.herobrine.autospeller.config.LinterConfigurationInterface
+import fr.herobrine.autospeller.dictionary.BuiltinDictionary
+import fr.herobrine.autospeller.dictionary.RemoteDictionaryUpdater
 import fr.herobrine.autospeller.ext.asLiteral
 import fr.herobrine.autospeller.ext.asTranslatable
 import fr.herobrine.autospeller.ignore.IgnoreList
@@ -37,8 +39,8 @@ class AutospellerConfiguration: LinterConfigurationInterface {
     @SerialEntry(value = "ignored_words")
     var ignoredWords = emptyList<String>()
 
-	@SerialEntry(value = "builtin_dictionary")
-	var builtinDictionary = emptyList<String>()
+	@SerialEntry(value = "dictionary_url")
+	var dictionaryUrl: String = ""
 
     @SerialEntry(value = "underline_color")
     override var underlineColor = Color.RED
@@ -112,6 +114,15 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 					}
 				)
 
+				option(
+					with(Option.createBuilder<String>()) {
+						name("text.config.autospeller.option.dictionary_url".asTranslatable())
+						controller(StringControllerBuilder::create)
+						binding("", this@AutospellerConfiguration::dictionaryUrl, { value -> this@AutospellerConfiguration.dictionaryUrl = value })
+						build()
+					}
+				)
+
                 build()
             })
 
@@ -134,7 +145,6 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 						controller({ opt -> IntegerSliderControllerBuilder.create(opt).range(100, 900).step(50).formatValue { value ->
 							return@formatValue "$value ms".asLiteral()
 						} })
-
 						binding(200, this@AutospellerConfiguration::debounceDelay, { delay -> this@AutospellerConfiguration.debounceDelay = delay })
 						build()
 					}
@@ -144,7 +154,6 @@ class AutospellerConfiguration: LinterConfigurationInterface {
                     controller(ColorControllerBuilder::create)
                     name("text.config.autospeller.option.underline_color".asTranslatable())
                     binding(Color.RED, this@AutospellerConfiguration::underlineColor, { color -> this@AutospellerConfiguration.underlineColor = color })
-
                     build()
                 })
 
@@ -153,45 +162,37 @@ class AutospellerConfiguration: LinterConfigurationInterface {
 
             save({
                 MOD_CONFIG_HANDLER.save()
-				this@AutospellerConfiguration.inputProcessor?.languageLevel = this@AutospellerConfiguration.languageLevel
-
-				if(this@AutospellerConfiguration.inputProcessor?.language != this@AutospellerConfiguration.language) {
-					this@AutospellerConfiguration.inputProcessor?.language = this@AutospellerConfiguration.language
-				}
+				RemoteDictionaryUpdater.update(this@AutospellerConfiguration.dictionaryUrl, BuiltinDictionary.load())
+				this@AutospellerConfiguration.inputProcessor = null
+				this@AutospellerConfiguration.createInputProcessor()
             })
 
             return@with build().generateScreen(parentScreen)
         }
     }
 
-    override fun ignoreFilter(): IgnoreFilter = IgnoreFilter(
-        IgnoreList(WordSet(
-            ignoredWords.map { WordElement(it) }
-        ))
-    )
-
     override fun createInputProcessor(): LanguageToolInputProcessor {
         return when(this.inputProcessor == null) {
             false -> this.inputProcessor!!
             else -> {
-                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.ignoreFilter(), languageLevel = this.languageLevel)
+                this.inputProcessor = LanguageToolInputProcessor(ignoreFilter = this.getIgnoreFilter(), languageLevel = this.languageLevel)
 
                 return with(this.inputProcessor!!) {
                     language = this@AutospellerConfiguration.language
-
                     this
                 }
             }
         }
-
     }
 
 	override fun getIgnoreFilter(): IgnoreFilter? {
 		return IgnoreFilter(
 			IgnoreList(
-				WordSet(this.ignoredWords.map { w -> WordElement(w) }.plus(
-					this.builtinDictionary.map { w -> WordElement(w) }
-				))
+				WordSet(
+					ignoredWords.map { WordElement(it) }.plus(
+						BuiltinDictionary.load().words.map { WordElement(it) }
+					)
+				)
 			)
 		)
 	}
