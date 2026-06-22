@@ -119,19 +119,9 @@ object ChatRenderer {
                 }
 
 				if(renderingTicket.lintingSession.sessionMode == SessionMode.DICTIONARY_ADDING) {
-					val additionStyle = Identifier.parse("autospeller:addition")
+					var additionStyle = Identifier.parse("autospeller:addition")
 					val originVector = Vector2i(underlineStartX, editBox.y)
 					val tooltipWidth = textWidth(textToken)
-
-					graphics.tooltip(
-						editBox.getFont(),
-						listOf(ClientTooltipComponent.create(
-							FormattedCharSequence.forward(textToken, Style.EMPTY)
-						)),
-						underlineStartX, editBox.y,
-						tooltipPositioner,
-						additionStyle
-					)
 
 					val tooltipInfo = TooltipRenderingInfo(
 						originVector,
@@ -145,6 +135,20 @@ object ChatRenderer {
 					if(widgetBoundingBox.contains(pointerPosition)) {
 						highlightedReplacement = AdditionTooltipWidget(textToken)
 						graphics.requestCursor(CursorTypes.POINTING_HAND)
+
+						additionStyle = Identifier.parse("autospeller:addition_active")
+					}
+
+					renderingQueue.add {
+						graphics.tooltip(
+							editBox.getFont(),
+							listOf(ClientTooltipComponent.create(
+								FormattedCharSequence.forward(textToken, Style.EMPTY)
+							)),
+							underlineStartX, editBox.y,
+							tooltipPositioner,
+							additionStyle
+						)
 					}
 				}
 
