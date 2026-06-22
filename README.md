@@ -17,12 +17,13 @@ While the mod is still in it's early development, it already provides grammar, p
 ![fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_64h.png)
 ![neoforge](assets/neoforge.png)
 
-Autospeller currently only supports Minecraft version **26.1** and the **Fabric** and **NeoForge** modloaders. Forge support is not planned.
+Autospeller currently only supports the **Fabric** and **NeoForge** modloaders. Forge support is not planned.
 
 Further Minecraft versions will gain support as they roll out.
 
 | Version  | Fabric | NeoForge |
 |----------|--------|----------|
+| **26.2** | ✅      | ✅        |
 | **26.1** | ✅      | ✅        |
 
 Autospeller currently only supports **French** and **English** (default).
