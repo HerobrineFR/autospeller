@@ -29,7 +29,7 @@ object InputManager {
 	}
 
 	fun isAddingWord(): Boolean {
-		val windowHandle = Minecraft.getInstance().getWindow().handle();
+		val windowHandle = Minecraft.getInstance().window.handle();
 		return GLFW.glfwGetKey(windowHandle, addWordKeyMapping.getKey().value) == GLFW.GLFW_PRESS;
 	}
 }

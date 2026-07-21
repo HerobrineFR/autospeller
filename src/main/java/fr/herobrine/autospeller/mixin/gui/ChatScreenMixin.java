@@ -15,7 +15,6 @@ import kotlin.time.Clock;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.ChatScreen;
-import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import org.joml.Vector2i;
 import org.jspecify.annotations.Nullable;
@@ -38,9 +37,6 @@ public abstract class ChatScreenMixin {
 
     @Shadow
     protected boolean isDraft;
-
-	@Shadow
-	public abstract boolean keyPressed(KeyEvent event);
 
 	@Unique @Nullable
     private ChatRenderingTicket chatRenderingTicket;
