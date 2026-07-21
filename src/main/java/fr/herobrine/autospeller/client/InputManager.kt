@@ -2,7 +2,6 @@ package fr.herobrine.autospeller.client
 
 import com.mojang.blaze3d.platform.InputConstants
 import fr.herobrine.autospeller.client.ext.getKey
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft

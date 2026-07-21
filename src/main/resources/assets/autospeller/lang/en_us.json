@@ -21,5 +21,7 @@
   "text.config.autospeller.option.max_suggestions": "Max. suggestions",
 
   "text.config.autospeller.selected_language": "Language",
-  "text.config.autospeller.language_level": "Correction level"
+  "text.config.autospeller.language_level": "Correction level",
+  "key.category.autospeller.keybinds": "Autospeller",
+  "key.autospeller.quick_add": "Dictionary addition"
 }
