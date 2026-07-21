@@ -8,10 +8,14 @@ import fr.herobrine.autospeller.dictionary.RemoteDictionaryUpdater
 import fr.herobrine.autospeller.service.LintingService
 
 object AutospellerClient {
+
     lateinit var service: LintingService
+
 
 	fun create() {
 		Autospeller.logger.info("[Autospeller] Client started")
+
+		InputManager.registerKeybinds()
 
 		ConfigMigrator.migrateBuiltinDictionary()
 		MOD_CONFIG_HANDLER.load()

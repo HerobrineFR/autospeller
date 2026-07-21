@@ -10,6 +10,7 @@
   ],
   "client": [
     "gui.ChatScreenMixin",
-    "gui.EditBoxAccessor"
+    "gui.EditBoxAccessor",
+    "gui.KeyMappingAccessor"
   ]
 }
