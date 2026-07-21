@@ -78,16 +78,16 @@ commit_preprocessors = [
 # Assigns commits to groups.
 # Optionally sets the commit's scope and can decide to exclude commits from further processing.
 commit_parsers = [
-	{ message = "^feat", group = "🎨️ Feature" },
-	{ message = "^fix", group = "🔧 Fixes" },
-	{ message = "^doc", group = "📘 Documentation" },
-	{ message = "^perf", group = "🚄 Performance" },
-	{ message = "^refactor", group = "🚜 Refactor" },
-	{ message = "^style", group = "🏛️ Code Style" },
-	{ message = "^revert", group = "Revert" },
-	{ message = "^test", group = "Tests" },
-	{ message = "^chore", group = "Chores" },
-	{ body = ".*security", group = "Security" },
+	{ message = "^feat", group = "<!-- 0 --> 🎨️ Feature" },
+	{ message = "^fix", group = "<!-- 1 --> 🔧 Fixes" },
+	{ message = "^doc", group = "<!-- 2 --> 📘 Documentation" },
+	{ message = "^perf", group = "<!-- 3 --> 🚄 Performance" },
+	{ message = "^refactor", group = "<!-- 4 --> 🚜 Refactor" },
+	{ message = "^style", group = "<!-- 5 --> 🏛️ Code Style" },
+	{ message = "^revert", group = "<!-- 6 -->Revert" },
+	{ message = "^test", group = "<!-- 7 -->Tests" },
+	{ message = "^chore", group = "<!-- 8 --> 🧹 Chores" },
+	{ body = ".*security", group = "<!-- 9 --> Security" },
 	{ message = ".*\\((ci|cd|dx)(/.*)?\\).*", group = "Development/Tooling" },
 
 	# Fallback
