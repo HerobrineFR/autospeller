@@ -1,19 +1,9 @@
 package fr.herobrine.autospeller.client.config
 
-import dev.isxander.yacl3.api.ConfigCategory
-import dev.isxander.yacl3.api.ListOption
-import dev.isxander.yacl3.api.Option
-import dev.isxander.yacl3.api.OptionGroup
-import dev.isxander.yacl3.api.YetAnotherConfigLib
-import dev.isxander.yacl3.api.controller.ColorControllerBuilder
-import dev.isxander.yacl3.api.controller.EnumControllerBuilder
-import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder
-import dev.isxander.yacl3.api.controller.StringControllerBuilder
-import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder
+import dev.isxander.yacl3.api.*
+import dev.isxander.yacl3.api.controller.*
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
 import dev.isxander.yacl3.config.v2.api.SerialEntry
-import dev.isxander.yacl3.gui.controllers.ColorController
-import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController
 import fr.herobrine.autospeller.client.linting.LanguageToolInputProcessor
 import fr.herobrine.autospeller.config.LinterConfigurationInterface
 import fr.herobrine.autospeller.dictionary.BuiltinDictionary
@@ -26,11 +16,8 @@ import fr.herobrine.autospeller.language.LanguageLevel
 import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.language.WordSet
 import fr.herobrine.autospeller.service.IgnoreFilter
-import fr.herobrine.autospeller.service.InputProcessor
 import net.minecraft.client.gui.screens.Screen
 import java.awt.Color
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
 
 class AutospellerConfiguration: LinterConfigurationInterface {
     @SerialEntry(value = "enable_mod")

@@ -52,7 +52,7 @@ data class LintingService(
                     null
                 }
                 true -> {
-                    val result = this.getInputProcessor().process(input = ticket.input, languageLevel = this.linterConfiguration.languageLevel, maxSuggestions = this.linterConfiguration.maxSuggestions, dynamicDictionary = this.dynamicDictionary)
+                    val result = this.getInputProcessor().process(input = ticket.input, beginsAt =  ticket.prefixLength, languageLevel = this.linterConfiguration.languageLevel, maxSuggestions = this.linterConfiguration.maxSuggestions, dynamicDictionary = this.dynamicDictionary)
                     session.lastCheck = Clock.System.now()
                     session.lastInput = ticket.input
 

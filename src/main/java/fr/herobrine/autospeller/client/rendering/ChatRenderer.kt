@@ -1,23 +1,17 @@
 package fr.herobrine.autospeller.client.rendering
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes
-import fr.herobrine.autospeller.Autospeller
 import fr.herobrine.autospeller.client.AutospellerClient
 import fr.herobrine.autospeller.client.ext.getFont
 import fr.herobrine.autospeller.client.ext.visibleText
-import fr.herobrine.autospeller.ext.asLiteral
 import fr.herobrine.autospeller.ext.asTranslatable
 import fr.herobrine.autospeller.linting.SessionMode
 import fr.herobrine.autospeller.linting.TextSuggestion
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.TextAlignment
 import net.minecraft.client.gui.components.EditBox
-import net.minecraft.client.gui.font.FontManager
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner
-import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 import net.minecraft.resources.Identifier

@@ -17,7 +17,7 @@ interface InputProcessor {
      *
      * @return A result which can include a list of suggestions.
      */
-    fun process(input: TokenInputElement, languageLevel: LanguageLevel = LanguageLevel.DEFAULT, maxSuggestions: Int = 4, dynamicDictionary: Collection<WordElement>?): LintingResult
+    fun process(input: TokenInputElement, beginsAt: Int = 0, languageLevel: LanguageLevel = LanguageLevel.DEFAULT, maxSuggestions: Int = 4, dynamicDictionary: Collection<WordElement>?): LintingResult
 
     /**
      * Tells if the input processor is ready.
