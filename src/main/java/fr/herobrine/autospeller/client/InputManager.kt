@@ -1,7 +1,9 @@
 package fr.herobrine.autospeller.client
 
-import com.mojang.blaze3d.platform.InputConstants
 import fr.herobrine.autospeller.client.ext.getKey
+import fr.herobrine.autospeller.client.util.KEYBIND_CATEGORY
+import fr.herobrine.autospeller.client.util.MAPPING_QUICK_ADD
+//? if fabric
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft
@@ -14,18 +16,20 @@ object InputManager {
 	lateinit var addWordKeyMapping: KeyMapping
 
 	fun registerKeybinds() {
+		//? if fabric {
 		keybindCategory = KeyMapping.Category.register(
 			Identifier.parse("autospeller:keybinds")
 		)
 
+		KEYBIND_CATEGORY = keybindCategory
+
 		addWordKeyMapping = KeyMappingHelper.registerKeyMapping(
-			KeyMapping(
-				"key.autospeller.quick_add",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_LEFT_ALT,
-				keybindCategory
-			)
+			MAPPING_QUICK_ADD
 		)
+		//? } else if neoforge {
+		/*keybindCategory = KEYBIND_CATEGORY
+		addWordKeyMapping = MAPPING_QUICK_ADD
+		*///? }
 	}
 
 	fun isAddingWord(): Boolean {
