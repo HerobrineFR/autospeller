@@ -1,27 +1,23 @@
 package fr.herobrine.autospeller.mixin.gui;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.kikugie.fletching_table.annotation.MixinEnvironment;
 import fr.herobrine.autospeller.client.AutospellerClient;
+import fr.herobrine.autospeller.client.InputManager;
 import fr.herobrine.autospeller.client.linting.ChatLintingSession;
 import fr.herobrine.autospeller.client.rendering.ChatRenderer;
 import fr.herobrine.autospeller.client.rendering.ChatRenderingTicket;
 import fr.herobrine.autospeller.client.rendering.ChatTooltipWidget;
 import fr.herobrine.autospeller.language.TokenInputElement;
-import fr.herobrine.autospeller.language.WordElement;
 import fr.herobrine.autospeller.linting.LintingResult;
 import fr.herobrine.autospeller.linting.LintingTicket;
 import fr.herobrine.autospeller.linting.SessionMode;
 import kotlin.time.Clock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.ChatScreen;
-import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import org.joml.Vector2i;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -41,9 +37,6 @@ public abstract class ChatScreenMixin {
 
     @Shadow
     protected boolean isDraft;
-
-	@Shadow
-	public abstract boolean keyPressed(KeyEvent event);
 
 	@Unique @Nullable
     private ChatRenderingTicket chatRenderingTicket;
@@ -72,10 +65,9 @@ public abstract class ChatScreenMixin {
 				return;
 			}
 
-			var windowHandle = Minecraft.getInstance().getWindow().handle();
-			var leftAltPressed = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_LEFT_ALT) == GLFW.GLFW_PRESS;
+			var addingWord = InputManager.INSTANCE.isAddingWord();
 
-			this.lintingSession.setSessionMode(leftAltPressed ? SessionMode.DICTIONARY_ADDING : SessionMode.LINTING);
+			this.lintingSession.setSessionMode(addingWord ? SessionMode.DICTIONARY_ADDING : SessionMode.LINTING);
 
             if(lintingService.getInputProcessor().isPending()) {
                 ChatRenderer.INSTANCE.displayInputProcessorPendingState(
