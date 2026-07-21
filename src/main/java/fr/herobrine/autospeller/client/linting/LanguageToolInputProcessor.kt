@@ -68,6 +68,7 @@ data class LanguageToolInputProcessor(
      */
     override fun process(
 	    input: TokenInputElement,
+	    beginsAt: Int,
 	    languageLevel: LanguageLevel,
 	    maxSuggestions: Int,
 	    dynamicDictionary: Collection<WordElement>?
@@ -79,10 +80,11 @@ data class LanguageToolInputProcessor(
             return LintingResult(emptyList())
         }
 
+		val inputText = input.input.substring(beginsAt)
         try {
-            val check = languageTool?.check(input.input, languageLevel.level)
+            val check = languageTool?.check(inputText, languageLevel.level)
             check?.forEach { match ->
-				val originalString = input.input.substring(match.fromPos, match.toPos)
+				val originalString = inputText.substring(match.fromPos, match.toPos)
 
                 var replacements = match.suggestedReplacements
                 if(replacements.size > maxSuggestions) {
@@ -92,8 +94,8 @@ data class LanguageToolInputProcessor(
                 if(!(dynamicDictionary?.contains(WordElement(originalString)) ?: false)) {
 					suggestions.add(
 						TextSuggestion(
-							match.fromPos,
-							match.toPos,
+							match.fromPos + beginsAt,
+							match.toPos + beginsAt,
 							replacements
 						)
 					)
