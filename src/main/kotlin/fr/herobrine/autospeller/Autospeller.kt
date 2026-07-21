@@ -1,18 +1,17 @@
 package fr.herobrine.autospeller
 
-import fr.herobrine.autospeller.client.AutospellerClient
-import fr.herobrine.autospeller.client.AutospellerClient.create
-import fr.herobrine.autospeller.platform.Platform
 //? fabric {
 import fr.herobrine.autospeller.platform.fabric.FabricPlatform
 //?} neoforge {
 /*import fr.herobrine.autospeller.platform.neoforge.NeoforgePlatform
 *///?}
+import fr.herobrine.autospeller.client.AutospellerClient
+import fr.herobrine.autospeller.platform.Platform
 import org.slf4j.LoggerFactory
 
 object Autospeller {
     const val MOD_ID = /*$ mod_id*/"autospeller";
-	const val MOD_VERSION = /*$ mod_version*/"1.5.0";
+	const val MOD_VERSION = /*$ mod_version*/"1.6.0";
 	const val MOD_FRIENDLY_NAME =   /*$ mod_name*/"Autospeller";
 
 	private val PLATFORM: Platform = createPlatformInstance()
@@ -20,11 +19,11 @@ object Autospeller {
     val logger = LoggerFactory.getLogger(MOD_ID)
 
 	fun onInitialize() {
-		logger.info("Initializing {} on {}", MOD_ID, this.PLATFORM)
+		logger.info("Initializing $MOD_ID on ${this.PLATFORM}")
 	}
 
 	fun onInitializeClient() {
-		logger.info("Initializing {} Client on {}", MOD_ID, this.PLATFORM)
+		logger.info("Initializing $MOD_ID Client on ${this.PLATFORM}")
 		AutospellerClient.create()
 	}
 

@@ -6,7 +6,6 @@ import fr.herobrine.autospeller.language.WordElement
 import fr.herobrine.autospeller.service.IgnoreFilter
 import fr.herobrine.autospeller.service.InputProcessor
 import java.awt.Color
-import kotlin.time.Duration
 
 interface LinterConfigurationInterface {
     /**
