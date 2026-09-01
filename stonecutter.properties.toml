@@ -37,6 +37,13 @@ deps.modmenu = "20.0.0-beta.2"
 deps.yacl = "3.9.4+26.2"
 deps.fabric-language-kotlin = "1.13.12+kotlin.2.4.0"
 
+[fabric."26.3"]
+deps.minecraft = "26.3-pre-1"
+deps.fabric-api = "0.159.1+26.3"
+deps.modmenu = "21.0.0-alpha.1"
+deps.yacl = "3.9.6+26.3"
+deps.fabric-language-kotlin = "1.13.13+kotlin.2.4.10"
+
 [neoforge]
 
 [neoforge."26.1.2"]
