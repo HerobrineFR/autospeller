@@ -1,10 +1,10 @@
 mod.id = "autospeller"
 mod.name = "Autospeller"
 mod.group = "fr.herobrine"
-mod.version = "1.6.0"
-mod.channel_tag = ""
+mod.version = "1.6.1"
+mod.channel_tag = "-beta.1"
 mod.description = "A mod that provides chat corrections."
-mod.authors = ["Yazor"]
+mod.authors = ["Ovillya"]
 mod.contributors = []
 mod.inception_year = "2026"
 mod.license.name = "MIT"
@@ -15,9 +15,9 @@ mod.homepage_url = "https://modrinth.com/mod/autospeller"
 mod.issues_url = "https://github.com/HerobrineFR/autospeller/issues"
 mod.discord_url = ""
 [[mod.pom.developers]]
-id = "yazor"
-name = "Yazor"
-url = "https://github.com/Yaazor"
+id = "ovillya"
+name = "Ovillya"
+url = "https://github.com/Ovillya"
 
 [fabric]
 deps.fabric-loader = "0.19.2"
