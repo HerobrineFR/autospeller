@@ -96,17 +96,17 @@ dependencies {
 	implementation("dev.isxander:yet-another-config-lib:${prop("deps.yacl")}-neoforge")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.21")
 
-	transitiveInclude("org.languagetool:language-en:6.6") {
+	transitiveInclude("org.languagetool:language-en:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
 	}
 
-	transitiveInclude("org.languagetool:language-fr:6.6") {
+	transitiveInclude("org.languagetool:language-fr:6.") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
 	}
 
-	transitiveInclude("org.languagetool:languagetool-core:6.6") {
+	transitiveInclude("org.languagetool:languagetool-core:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
 	}
