@@ -108,7 +108,6 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("org.apache.lucene")
 		exclude("io.grpc")
 	}
 
@@ -117,7 +116,6 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("org.apache.lucene")
 		exclude("io.grpc")
 	}
 
@@ -126,7 +124,6 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("org.apache.lucene")
 		exclude("io.grpc")
 	}
 }
