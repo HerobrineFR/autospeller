@@ -82,6 +82,9 @@ repositories {
 	mavenCentral()
 	strictMaven("https://maven.gnomecraft.net/releases/", "com.terraformersmc") { name = "TerraformersMC" }
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+	maven("https://maven.isxander.dev/releases") {
+		name = "Xander Maven"
+	}
 }
 
 val transitiveInclude by configurations.creating {
