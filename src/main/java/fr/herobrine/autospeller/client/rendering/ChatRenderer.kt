@@ -141,7 +141,8 @@ object ChatRenderer {
 							)),
 							underlineStartX, editBox.y,
 							tooltipPositioner,
-							additionStyle
+							additionStyle //? if >= 26.3 {
+							, false //?}
 						)
 					}
 				}
@@ -169,10 +170,10 @@ object ChatRenderer {
 						)
 
 						//? if >= 26.2 {
-						/*val screen = Minecraft.getInstance().gui.screen()
-						*///? } else {
-						val screen = Minecraft.getInstance().screen
-						//? }
+						val screen = Minecraft.getInstance().gui.screen()
+						//? } else {
+						/*val screen = Minecraft.getInstance().screen
+						*///? }
 						if (screen != null) {
 
 							with(screen) {
@@ -218,7 +219,8 @@ object ChatRenderer {
 								or.x,
 								or.y,
 								tooltipPositioner,
-								tooltipStyle
+								tooltipStyle //? if >= 26.3 {
+								, false //?}
 							)
 						}
 
