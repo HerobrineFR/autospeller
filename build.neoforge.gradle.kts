@@ -101,7 +101,7 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 	}
 
-	transitiveInclude("org.languagetool:language-fr:6.") {
+	transitiveInclude("org.languagetool:language-fr:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
 	}
