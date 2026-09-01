@@ -103,19 +103,28 @@ dependencies {
 	localRuntime("net.fabricmc:fabric-language-kotlin:${prop("deps.fabric-language-kotlin")}")
 	localRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 
-	transitiveInclude("org.languagetool:language-en:6.6") {
+	transitiveInclude("org.languagetool:language-en:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
 	}
 
-	transitiveInclude("org.languagetool:language-fr:6.6") {
+	transitiveInclude("org.languagetool:language-fr:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
 	}
 
-	transitiveInclude("org.languagetool:languagetool-core:6.6") {
+	transitiveInclude("org.languagetool:languagetool-core:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
 	}
 }
 
