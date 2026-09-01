@@ -101,7 +101,7 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("io.grpc")
+		exclude("org.apache.lucene")
 	}
 
 	transitiveInclude("org.languagetool:language-fr:6.8") {
@@ -109,7 +109,7 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("io.grpc")
+		exclude("org.apache.lucene")
 	}
 
 	transitiveInclude("org.languagetool:languagetool-core:6.8") {
@@ -117,7 +117,7 @@ dependencies {
 		exclude("org.apache.commons", "commons-lang3")
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
-		exclude("io.grpc")
+		exclude("org.apache.lucene")
 	}
 }
 
