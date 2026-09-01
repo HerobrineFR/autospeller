@@ -106,16 +106,28 @@ dependencies {
 	transitiveInclude("org.languagetool:language-en:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
+		exclude("io.grpc")
 	}
 
 	transitiveInclude("org.languagetool:language-fr:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
+		exclude("io.grpc")
 	}
 
 	transitiveInclude("org.languagetool:languagetool-core:6.8") {
 		exclude("it.unimi.dsi")
 		exclude("org.apache.commons", "commons-lang3")
+		exclude("com.google.guava")
+		exclude("com.google.code.gson")
+		exclude("org.apache.lucene")
+		exclude("io.grpc")
 	}
 }
 
