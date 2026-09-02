@@ -43,7 +43,7 @@ object InputManager {
 		*///? } else {
 		val state = SDLKeyboard.SDL_GetKeyboardState();
 
-		return (state?.get(addWordKeyMapping.getKey().value) ?: false) == true;
+		return state?.get(addWordKeyMapping.getKey().value)?.toInt() != 0;
 		//? }
 	}
 }
