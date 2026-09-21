@@ -8,7 +8,7 @@
 ### Requires [Mod Menu](https://modrinth.com/mod/modmenu), [Yet Another Config Library (YACL)](https://modrinth.com/mod/yacl) and [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
 Autospeller provides text highlighting and suggestions to Minecraft's chat.
 
-While the mod is still in it's early development, it already provides grammar, punctuation and spelling corrections.
+While the mod is still in its early development, it already provides grammar, punctuation and spelling corrections.
 
 <img width="578" height="339" alt="image" src="https://github.com/user-attachments/assets/acf7e7b4-088a-4ccc-b4b2-0d6b1f6a7d6e" />
 
