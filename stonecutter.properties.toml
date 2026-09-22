@@ -58,3 +58,9 @@ deps.minecraft = "26.2"
 deps.neoforge = "26.2.0.1-beta"
 deps.yacl = "3.9.4+26.2"
 deps.kotlin-for-forge = "6.2.0"
+
+[neoforge."26.3"]
+deps.minecraft = "26.3"
+deps.neoforge = "26.3.0.7-beta"
+deps.yacl = "3.9.7+26.3"
+deps.kotlin-for-forge = "6.2.0"

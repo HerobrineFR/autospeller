@@ -24,7 +24,7 @@ stonecutter {
 
 		match("26.1.2", "fabric", "neoforge")
 		match("26.2", "fabric", "neoforge")
-		match("26.3", "fabric")
+		match("26.3", "fabric", "neoforge")
 
 		vcsVersion = "26.1.2-fabric"
 	}
