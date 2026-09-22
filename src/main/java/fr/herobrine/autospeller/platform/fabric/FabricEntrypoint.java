@@ -2,7 +2,7 @@ package fr.herobrine.autospeller.platform.fabric;
 
 //? fabric {
 
-/*import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
+import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import fr.herobrine.autospeller.Autospeller;
 import net.fabricmc.api.ModInitializer;
 
@@ -15,4 +15,4 @@ public class FabricEntrypoint implements ModInitializer {
 		FabricEventSubscriber.registerEvents();
 	}
 }
-*///?}
+//?}

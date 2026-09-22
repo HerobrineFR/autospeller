@@ -5,7 +5,7 @@ import net.minecraft.client.KeyMapping
 import net.minecraft.resources.Identifier
 
 //? if neoforge
-import net.neoforged.neoforge.client.settings.KeyConflictContext
+//import net.neoforged.neoforge.client.settings.KeyConflictContext
 
 //? if < 26.3 {
 //import org.lwjgl.glfw.GLFW
@@ -20,7 +20,7 @@ var KEYBIND_CATEGORY = KeyMapping.Category(
 val MAPPING_QUICK_ADD = KeyMapping(
 	"key.autospeller.quick_add",
 	//? if neoforge
-	KeyConflictContext.GUI,
+	//KeyConflictContext.GUI,
 	//? if < 26.3 {
 	/*InputConstants.Type.KEYSYM,
 	GLFW.GLFW_KEY_LEFT_ALT,

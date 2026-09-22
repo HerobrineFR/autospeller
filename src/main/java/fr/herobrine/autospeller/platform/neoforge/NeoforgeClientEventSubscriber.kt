@@ -1,6 +1,6 @@
 package fr.herobrine.autospeller.platform.neoforge
 //? if neoforge {
-import fr.herobrine.autospeller.Autospeller
+/*import fr.herobrine.autospeller.Autospeller
 import fr.herobrine.autospeller.client.util.KEYBIND_CATEGORY
 import fr.herobrine.autospeller.client.util.MAPPING_QUICK_ADD
 import net.neoforged.api.distmarker.Dist
@@ -33,4 +33,4 @@ object NeoforgeClientEventSubscriber {
 	}
 
 }
-//? }
+*///? }

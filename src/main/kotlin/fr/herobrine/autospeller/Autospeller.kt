@@ -1,10 +1,10 @@
 package fr.herobrine.autospeller
 
 //? fabric {
-/*import fr.herobrine.autospeller.platform.fabric.FabricPlatform
-*///?} neoforge {
-import fr.herobrine.autospeller.platform.neoforge.NeoforgePlatform
-//?}
+import fr.herobrine.autospeller.platform.fabric.FabricPlatform
+//?} neoforge {
+/*import fr.herobrine.autospeller.platform.neoforge.NeoforgePlatform
+*///?}
 import fr.herobrine.autospeller.client.AutospellerClient
 import fr.herobrine.autospeller.platform.Platform
 import org.slf4j.LoggerFactory
@@ -29,9 +29,9 @@ object Autospeller {
 
 	private fun createPlatformInstance(): Platform {
 		//? fabric {
-		/*return FabricPlatform()
-		*///?} neoforge {
-		return NeoforgePlatform()
-		//?}
+		return FabricPlatform()
+		//?} neoforge {
+		/*return NeoforgePlatform()
+		*///?}
 	}
 }
