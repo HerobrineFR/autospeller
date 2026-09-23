@@ -23,6 +23,7 @@ Further Minecraft versions will gain support as they roll out.
 
 | Version  | Fabric | NeoForge |
 |----------|--------|----------|
+| **26.3** | ✅      | ✅        |
 | **26.2** | ✅      | ✅        |
 | **26.1** | ✅      | ✅        |
 
