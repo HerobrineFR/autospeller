@@ -10,9 +10,15 @@ kotlin {
 	}
 }
 
+var useKotlinLangForge = false;
+
 stonecutter {
 	val (version, loader) = current.project.split('-', limit = 2)
 	properties.tags(version, loader)
+
+	if (current.parsed >= "26.3") {
+		useKotlinLangForge = true
+	}
 
 	replacements.string(current.parsed >= "1.21.11") {
 		replace("ResourceLocation", "Identifier")
@@ -33,10 +39,14 @@ platform {
 			forgeLikeVersionRange = ">=${prop("deps.yacl")}-${loader}"
 			modrinth = "yacl"
 		}
-		required("kotlinforforge") {
-			forgeLikeVersionRange = ">=${prop("deps.kotlin-for-forge")}"
-			modrinth = "kotlin-for-forge"
+
+		if (!useKotlinLangForge) {
+			required("kotlinforforge") {
+				forgeLikeVersionRange = ">=${prop("deps.kotlin-for-forge")}"
+				modrinth = "kotlin-for-forge"
+			}
 		}
+
 	}
 }
 
@@ -76,12 +86,10 @@ neoForge {
 repositories {
 	mavenCentral()
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
-
-	maven("https://prmaven.neoforged.net/NeoForge/pr3198") {
-		content {
-			includeModule("net.neoforged", "neoforge")
-		}
+	maven("https://maven.isxander.dev/releases") {
+		name = "Xander Maven"
 	}
+	maven("https://repo.nyon.dev/releases")
 }
 
 val transitiveInclude by configurations.creating {
@@ -95,6 +103,9 @@ dependencies {
 	// implementation(libs.moulberry.mixinconstraints)
 	implementation("dev.isxander:yet-another-config-lib:${prop("deps.yacl")}-neoforge")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.21")
+	if (useKotlinLangForge) {
+		implementation("dev.nyon:KotlinLangForge:${prop("deps.kotlin-lang-forge")}+neoforge")
+	}
 
 	transitiveInclude("org.languagetool:language-en:6.8") {
 		exclude("it.unimi.dsi")
