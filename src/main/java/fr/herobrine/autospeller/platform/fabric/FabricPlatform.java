@@ -2,7 +2,7 @@ package fr.herobrine.autospeller.platform.fabric;
 
 //? fabric {
 
-import fr.herobrine.autospeller.platform.Platform;
+/*import fr.herobrine.autospeller.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatform implements Platform {
@@ -27,4 +27,4 @@ public class FabricPlatform implements Platform {
 		return FabricLoader.getInstance().isDevelopmentEnvironment();
 	}
 }
-//?}
+*///?}
