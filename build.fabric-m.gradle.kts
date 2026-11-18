@@ -112,6 +112,7 @@ dependencies {
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
 		exclude("org.apache.lucene")
+		exclude("net.java.dev.jna")
 	}
 
 	transitiveInclude("org.languagetool:language-fr:6.8") {
@@ -120,6 +121,7 @@ dependencies {
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
 		exclude("org.apache.lucene")
+		exclude("net.java.dev.jna")
 	}
 
 	transitiveInclude("org.languagetool:languagetool-core:6.8") {
@@ -128,6 +130,7 @@ dependencies {
 		exclude("com.google.guava")
 		exclude("com.google.code.gson")
 		exclude("org.apache.lucene")
+		exclude("net.java.dev.jna")
 	}
 }
 
