@@ -54,8 +54,17 @@ public abstract class ChatScreenMixin {
             method = {"extractRenderState"},
             at = {@At("TAIL")}
     )
-    private void onRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
+    //? if <26.4 {
+	private void onRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
+	//? } elif >=26.4 {
+	/*private void onRender(GuiGraphicsExtractor graphics, CallbackInfo ci) {
+	*///? }
         var lintingService = AutospellerClient.INSTANCE.getService();
+
+		//? if >= 26.4 {
+		/*var mouseX = graphics.mouseX();
+		var mouseY = graphics.mouseY();
+		*///? }
 
         if(lintingService.getLinterConfiguration().getEnableMod() && input.isVisible()) {
             this.initializeSession();
