@@ -141,8 +141,9 @@ object ChatRenderer {
 							)),
 							underlineStartX, editBox.y,
 							tooltipPositioner,
-							additionStyle //? if >= 26.3 {
-							, false //?}
+							additionStyle  //? if >=26.3 <26.4 {
+							, false //?} elif >= 26.4 {
+							/*, 0 *///?}
 						)
 					}
 				}
@@ -219,8 +220,9 @@ object ChatRenderer {
 								or.x,
 								or.y,
 								tooltipPositioner,
-								tooltipStyle //? if >= 26.3 {
-								, false //?}
+								tooltipStyle //? if >=26.3 <26.4 {
+								, false //?} elif >= 26.4 {
+								/*, 0 *///?}
 							)
 						}
 
