@@ -100,7 +100,6 @@ val transitiveInclude by configurations.creating {
 configurations.implementation.get().extendsFrom(transitiveInclude)
 
 dependencies {
-	// implementation(libs.moulberry.mixinconstraints)
 	implementation("dev.isxander:yet-another-config-lib:${prop("deps.yacl")}-neoforge")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.21")
 	if (useKotlinLangForge) {

@@ -2,7 +2,7 @@ package fr.herobrine.autospeller.platform.neoforge;
 
 //? neoforge {
 
-import fr.herobrine.autospeller.Autospeller;
+/*import fr.herobrine.autospeller.Autospeller;
 import fr.herobrine.autospeller.client.config.AutospellerConfiguration;
 import fr.herobrine.autospeller.client.integration.AutospellerNeoforgeMenuIntegration;
 import net.neoforged.fml.ModLoadingContext;
@@ -17,4 +17,4 @@ public class NeoforgeEntrypoint {
 		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> AutospellerNeoforgeMenuIntegration.INSTANCE::createMenu);
 	}
 }
-//?}
+*///?}

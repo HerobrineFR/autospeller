@@ -47,7 +47,7 @@ deps.fabric-language-kotlin = "1.14.1+kotlin.2.4.20"
 [fabric."26.4"]
 deps.minecraft = "26.4-pre-1"
 deps.fabric-api = "0.167.1+26.4"
-deps.modmenu = "22.0.0-alpha.7
+deps.modmenu = "22.0.0-alpha.7"
 deps.yacl = "3.9.10+26.4"
 deps.fabric-language-kotlin = "1.14.2+kotlin.2.4.21"
 
@@ -71,3 +71,9 @@ deps.minecraft = "26.3"
 deps.neoforge = "26.3.0.16-beta"
 deps.yacl = "3.9.7+26.3"
 deps.kotlin-lang-forge = "2.14.1-k2.4.20-3.1"
+
+# [neoforge."26.4"]
+# deps.minecraft = "26.4-pre-1"
+# deps.neoforge = "26.3.0.16-beta"
+# deps.yacl = "3.9.10+26.4"
+# deps.kotlin-lang-forge = "2.20.1-k2.4.21-3.1"
